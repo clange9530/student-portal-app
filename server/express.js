@@ -6,6 +6,7 @@ var path = require('path'),
     config = require('./config'),
     listingsRouter = require('../routes/listings.server.routes'),
     getCoordinates = require('../controllers/coordinates.server.controller.js');
+const basicAuth = require('express-basic-auth')
 
 module.exports.init = function() {
   //connect to database
@@ -23,6 +24,12 @@ module.exports.init = function() {
 /*Server connection to Amazon S3
 
   /* serve static files */
+
+
+/*Auth*/
+/* Uncomment for auth - probably a mongo query here Steven will take that.
+app.use(basicAuth({users: { 'admin': 'supersecret' }}))
+*/
 
   /* go to homepage for all routes not specified */
   app.get('*', function(req, res){
