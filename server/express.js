@@ -6,7 +6,7 @@ var path = require('path'),
     config = require('./config'),
     listingsRouter = require('../routes/listings.server.routes'),
     getCoordinates = require('../controllers/coordinates.server.controller.js');
-const basicAuth = require('express-basic-auth')
+const basicAuth = require('express-basic-auth');
 
 module.exports.init = function() {
   //connect to database
