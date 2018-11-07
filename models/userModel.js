@@ -20,7 +20,8 @@ var UserSchema = new Schema({
   Phone:String,
   Email:String,
   Github:String,
-  Team:String
+  Team:String,
+  Bio:String
 });
 
 

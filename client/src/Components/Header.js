@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => (
-  <header>
+  <header class="header">
     <nav>
       <ul>
-        <li><Link to='/'   >Home</Link></li>
-        <li><Link to='/users'>Individual Profiles</Link></li>
-        <li><Link to='/teams'>Teams</Link></li>
+        <li class="navBar"><Link to='/'   >Home</Link></li>
+        <li class="navBar"><Link to='/users'>Individual Profiles</Link></li>
+        <li class="navBar"><Link to='/teams'>Teams</Link></li>
       </ul>
     </nav>
   </header>
