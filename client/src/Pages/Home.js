@@ -2,7 +2,7 @@ import React from 'react';
 
 const Home = () => (
     <div>
-        <h1>Home Page</h1>
+        <h1>UF Client Comms App</h1>
     </div>
 
 )

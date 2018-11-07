@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Users from './Pages/Users';
-import Home from './Pages/Home';
-import Teams from './Pages/Teams';
+import Users from '../Pages/Users';
+import Home from '../Pages/Home';
+import Teams from '../Pages/Teams';
 
 
 
