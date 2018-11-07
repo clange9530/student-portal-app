@@ -3,14 +3,14 @@ var path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    config = require('./config'),
-    listingsRouter = require('../routes/listings.server.routes'),
-    getCoordinates = require('../controllers/coordinates.server.controller.js');
+    config = require('./config');
+    emailRouter = require('./routes/email.server.routes')
+    // getCoordinates = require('../controllers/coordinates.server.controller.js');
 const basicAuth = require('express-basic-auth');
 
 module.exports.init = function() {
   //connect to database
-  mongoose.connect(config.db.uri);
+  // mongoose.connect(config.db.uri);
 
   //initialize app
   var app = express();
@@ -25,6 +25,9 @@ module.exports.init = function() {
 
   /* serve static files */
 
+  /* use the email router for requests to the api */
+  /* TODO: Should we have a single API router for all of the API calls? */
+  app.use('/api/email', emailRouter);
 
 /*Auth*/
 /* Uncomment for auth - probably a mongo query here Steven will take that.
