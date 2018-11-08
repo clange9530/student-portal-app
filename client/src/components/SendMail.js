@@ -28,29 +28,39 @@ class SendMail extends React.Component {
         // var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         // return mail.match(mailformat);
         // return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-        alert(mail);
+        //alert(mail);
         var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
         return re.test(mail);
     }
 
     sendMessage() {
-        if (this.ValidateEmail(this.state.emailFrom)) {
-            alert("email is valid");
-        } else {
-            alert("email is not valid");
-        }
-
         if (this.state.emailFrom === "") {
             alert("Please enter the sender's email address.");
+        } else if (!this.ValidateEmail(this.state.emailFrom)) {
+            alert("The sender's email address is not valid.");
         } else if (this.state.emailTo === "") {
             alert("Please enter the recipient's email address.");
+        } else if (!this.ValidateEmail(this.state.emailTo)) {
+            alert("Recipient's email address is not valid.");
         } else if (this.state.emailSubject === "") {
             alert("Please enter a subject for the message.");
         } else if (this.state.emailBody === "") {
             alert("Please enter a message to send.");
         } else {
-            alert("sending email");
-            // TODO: Send the message...
+            fetch('api/email', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    sender:     this.state.emailFrom,
+                    recipient:  this.state.emailTo,
+                    subject:    this.state.emailSubject,
+                    body:       this.state.emailBody
+                })
+            })
+            alert("Message sent.");
         }        
     }
 

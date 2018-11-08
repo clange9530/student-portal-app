@@ -24,7 +24,6 @@ exports.send = function(req, res) {
             res.status(500).send(err);
         } else {
             // TODO: Should we return the sent email or a simple status message?
-            res.send("Message sent");
             res.json(email);
         }
     });
