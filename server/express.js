@@ -10,7 +10,7 @@ const basicAuth = require('express-basic-auth');
 
 module.exports.init = function() {
   //connect to database
-  // mongoose.connect(config.db.uri);
+  mongoose.connect(config.db.uri);
 
   //initialize app
   var app = express();
