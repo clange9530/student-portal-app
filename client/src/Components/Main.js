@@ -5,8 +5,6 @@ import Home from '../Pages/Home';
 import Teams from '../Pages/Teams';
 import sendMail from '../Components/SendMail';
 
-
-
 const Main = () => (
     <main>
         <Switch>

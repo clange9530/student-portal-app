@@ -2,6 +2,15 @@ import React from 'react';
 //Import statement to import API that will GET data for individual profile from MongoDB.
 //Import statement to import profile picture from Amazon s3.
 
+function fetch (){
+    const ul = document.getElementById('user');
+    const url = 'GETURLFROMAPI';
+    fetch(url).then((resp) => resp.json())
+    .catch(function(error){
+
+    });
+}
+
 
 const Users = () => (
     <div>
