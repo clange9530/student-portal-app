@@ -11,14 +11,10 @@ router.route('/')
   .get(email.list)
   .post(email.send);
 
-/*
-  The ':' specifies a URL parameter. 
- */
+
+
+
 // TODO: This is for when we need to display a previously-sent email
-// router.route('/:listingId')
-//   .get(listings.read)
-//   .put(getCoordinates, listings.update)
-//   .delete(listings.delete);
 
 /*
   The 'router.param' method allows us to specify middleware we would like to use to handle 
