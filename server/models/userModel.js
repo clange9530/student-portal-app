@@ -21,7 +21,8 @@ var UserSchema = new Schema({
   Email:String,
   Github:String,
   Team:String,
-  Bio:String
+  Bio:String,
+  Skills:Array
 });
 
 
