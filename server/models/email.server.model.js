@@ -5,12 +5,13 @@ var mongoose = require('mongoose'),
 
 /* Create the schema */
 var emailSchema = new Schema({
+    project_id: { type: String, required: true },
     status: String,
     date_sent: Date,
-    sender: String,
-    recipient: String,
-    subject: String,
-    body: String
+    sender: { type: String, required: true },
+    recipient: { type: String, required: true },
+    subject: { type: String, required: true },
+    body: { type: String, required: true }
   });
 
   /* Use your schema to instantiate a Mongoose model */

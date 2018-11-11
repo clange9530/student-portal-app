@@ -17,9 +17,27 @@ code {
 	box-sizing: border-box;
 }
 
+tr {
+	padding: 0;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+th {
+	font-weight: bold;
+	padding: 0;
+	text-align: left;
+	background-color: #f2f2f2;
+	height: 2rem;
+}
+td:hover {
+	position: left;
+	cursor: pointer;
+	background-color: #ddd;
+}
+
 .column1 {
 	float: left;
-	width: 50%;
   padding: 0px 20px 20px 0px;
   margin: 1rem;
 }
@@ -28,7 +46,7 @@ code {
 	font-weight: bold;
 }
 
-.add-building {
+.email-grid {
 	float: left;
 	padding: 0px 20px 20px 20px;
 }
@@ -54,5 +72,27 @@ code {
 	border-radius: 3px;
 	padding: 6px 12px;
 	width: calc(100% - 2rem);
-	/*height: 34px;*/
+}
+
+.tableWrapper {
+	min-height: 400px;
+	max-height: 800px;
+	overflow: auto;
+	scroll-behavior: smooth;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+.email-date-sent-column {
+	width: 20%;
+	padding-left: 10px
+}
+
+.email-subject-column {
+	width: 75%;
+}
+
+.email-list-item {
+  text-decoration: none;
+  color: inherit;
 }
