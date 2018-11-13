@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import SendMail from "./components/SendMail"
-import ListMail from "./components/ListMail"
+import SendMail from "./Components/SendMail"
+import ListMail from "./Components/ListMail"
 
 function BasicExample() {
   return (
@@ -63,7 +63,7 @@ function Topics({ match }) {
           <Link to={`${match.url}/rendering`}>Rendering with React</Link>
         </li>
         <li>
-          <Link to={`${match.url}/components`}>Components</Link>
+          <Link to={`${match.url}/Components`}>Components</Link>
         </li>
         <li>
           <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
