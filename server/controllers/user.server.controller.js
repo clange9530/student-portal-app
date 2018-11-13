@@ -1,6 +1,6 @@
 //Dependencies.
 var User = require('../models/userModel.js'),
-    mongoose = require(mongoose);
+    mongoose = require('mongoose');
 
 module.exports.userByID = function(req, res, next, _id) {
     User.findById(_id, function(err, user) {
@@ -63,7 +63,7 @@ module.exports.create = function(req, res) {
     }});
   };
   
-  /* Retreive all the directory users, sorted alphabetically by user code */
+  /* Retreive users, sorted alphabetically by user code */
   module.exports.list = function(req, res) {
     /* Your code here */
     console.log('Finding users');

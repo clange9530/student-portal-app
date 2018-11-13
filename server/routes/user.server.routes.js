@@ -6,7 +6,7 @@ var express = require('express');
 
 
 //Get all users.
-router.route('/users')
+router.route('/')
   .get(user.list)
   .post(user.create);
 
