@@ -9,6 +9,7 @@ const Header = () => (
         <li class="navBar"><Link to='/users'>Individual Profiles</Link></li>
         <li class="navBar"><Link to='/teams'>Teams</Link></li>
         <li class="navBar"><Link to='/sendMail'>Send Mail</Link></li>
+        <li class="navBar"><Link to="/listmail">View emails</Link></li>
       </ul>
     </nav>
   </header>
