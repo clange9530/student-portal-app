@@ -7,6 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Input } from '@material-ui/core';
 
+
 class SendMail extends React.Component {
     constructor(props) {
         super(props);
@@ -23,7 +24,7 @@ class SendMail extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    ValidateEmail(mail) 
+    ValidateEmail(mail)
     {
         // var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         // return mail.match(mailformat);
@@ -61,14 +62,14 @@ class SendMail extends React.Component {
                 })
             })
             alert("Message sent.");
-        }        
+        }
     }
 
     handleChange(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        
+
         this.setState({[name]: value});
         console.log(name, value);
     }
@@ -106,81 +107,81 @@ class SendMail extends React.Component {
                         </Grid>
                         <Grid item md={12}>
                             <label className="display-label" htmlFor="emailStatus">Status</label>
-                            <Input 
-                                inputType="text" 
-                                className="text-input" 
-                                name="emailStatus" 
+                            <Input
+                                inputType="text"
+                                className="text-input"
+                                name="emailStatus"
                                 id="emailStatus"
                                 title="Status"
-                                value={this.state.emailStatus} 
+                                value={this.state.emailStatus}
                                 readOnly
                             />
                         </Grid>
                         <Grid item md={12}>
                             <label className="display-label" htmlFor="emailDateSent">Date sent</label>
-                            <Input 
-                                inputType="text" 
-                                className="text-input" 
-                                name="emailDateSent" 
+                            <Input
+                                inputType="text"
+                                className="text-input"
+                                name="emailDateSent"
                                 id="emailDateSent"
                                 title="Date sent"
                                 readOnly
-                                value={this.state.emailDateSent} 
+                                value={this.state.emailDateSent}
                             />
                         </Grid>
                         <Grid item md={12}>
                             <label className="display-label" htmlFor="emailFrom">Sender</label>
-                            <Input 
-                                inputType="text" 
-                                className="text-input" 
-                                name="emailFrom" 
+                            <Input
+                                inputType="text"
+                                className="text-input"
+                                name="emailFrom"
                                 id="emailFrom"
                                 title="From"
-                                value={this.state.emailFrom} 
-                                onChange={this.handleChange} 
+                                value={this.state.emailFrom}
+                                onChange={this.handleChange}
                                 placeholder="Enter the sender's email address"
                             />
                         </Grid>
                         <Grid item md={12}>
                             {/* TODO: need to figure out how to get this to format correctly with a better label */}
                             <label className="display-label" htmlFor="emailTo">Recipient</label>
-                            <Input 
-                                inputType="text" 
-                                className="text-input" 
-                                name="emailTo" 
+                            <Input
+                                inputType="text"
+                                className="text-input"
+                                name="emailTo"
                                 id="emailTo"
                                 title="To"
-                                value={this.state.emailTo} 
-                                onChange={this.handleChange} 
+                                value={this.state.emailTo}
+                                onChange={this.handleChange}
                                 placeholder="Enter the recipient's email address"
                             />
                         </Grid>
                         <Grid item md={12}>
                             <label className="display-label" htmlFor="emailSubject">Subject</label>
-                            <Input 
-                                inputType="text" 
-                                className="text-input" 
-                                name="emailSubject" 
+                            <Input
+                                inputType="text"
+                                className="text-input"
+                                name="emailSubject"
                                 id="emailSubject"
                                 title="Subject"
-                                value={this.state.emailSubject} 
-                                onChange={this.handleChange} 
+                                value={this.state.emailSubject}
+                                onChange={this.handleChange}
                                 placeholder="Enter the subject for the message"
                             />
                         </Grid>
                         <Grid item md={12}>
                             <label className="display-label" htmlFor="emailBody">Body</label>
                             {/* TODO: Figure out if another react or material Ui component would work better here */}
-                            <textarea 
-                                //inputType="text" 
-                                className="text-area" 
-                                name="emailBody" 
+                            <textarea
+                                //inputType="text"
+                                className="text-area"
+                                name="emailBody"
                                 id="emailBody"
                                 title="Body"
                                 rows={8}
                                 wrap="soft"
-                                value={this.state.emailBody} 
-                                onChange={this.handleChange} 
+                                value={this.state.emailBody}
+                                onChange={this.handleChange}
                                 //placeholder="Enter the message"
                             />
                         </Grid>
