@@ -3,7 +3,7 @@ var User = require('../models/userModel.js'),
     mongoose = require('mongoose');
 
 module.exports.userByID = function(req, res, next, _id) {
-    User.findById(_id, function(err, user) {
+    User.find({UserID: _id}, function(err, user) {
         if(err) {
         console.log(err);
         res.status(400).send(err);
