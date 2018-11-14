@@ -21,7 +21,7 @@ class Users extends Component {
             Bio:''
         }
     }
-    
+    /*
     componentDidMount(){
         this.getUserData();
     }
@@ -44,7 +44,7 @@ class Users extends Component {
             Bio: User.Bio  
         }));
     }
-    
+    */
     render() {
         return(
             <div>
@@ -82,8 +82,7 @@ class Users extends Component {
                             <tr>{this.state.Team}</tr>
                             <tr>Link to user's github</tr>
                         </table>
-                        <p>User's Bio</p>
-                        <button>Create New Profile</button>
+                        <p>User's Bio</p>                        
                     </div>
                     <div className="column">
                         <h4>Profile Pic</h4>
