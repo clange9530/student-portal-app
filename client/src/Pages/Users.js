@@ -3,6 +3,24 @@ import React, { Component } from 'react';
 //Import statement to import profile picture from Amazon s3.
 
 class Users extends Component {
+    constructor(){
+        super();
+        this.state = {
+            UserID: '',
+            Skills: [],
+            First: '',
+            Last: '',
+            Address: '',
+            City: '',
+            State: '',
+            Zipcode: '',
+            Phone: '',
+            Email: '',
+            Github: '',
+            Team: ''
+        };
+    }
+    /*
     state = {
         UserID: '',
         Skills: [],
@@ -17,12 +35,14 @@ class Users extends Component {
         Github: '',
         Team: ''
     }
-    
+    */
     
     componentDidMount(){
-        fetch('/api/users/user1')
-        .then(res => res.json())
-        .then(User => this.setState({ 
+        fetch('/api/users/user4')
+        .then(response => response.json())
+        .then(UserData => {
+            var User = UserData[0];
+            this.setState({ 
             Skills: User.Skills,
             UserID: User.UserID,
             First: User.First,
@@ -35,56 +55,49 @@ class Users extends Component {
             Email: User.Email,
             Github: User.Github,
             Team: User.Team
-        }))
+        })
+        })
         .catch(err => console.log(err));
     }
 
-    /*
-    getUserData = async () => {
-        const response = await fetch('api/users/user1');
-        const body = await JSON.stringify(response);
-        console.log(body);
-        return body;
-    }   
-    */
+    
     render() {
-        const userinfo = this.state;
+        
         return(
             <div>
                 <div className="row">
-                    <h3 class="header">{userinfo.UserID}</h3>
+                    <h3 class="header">{this.state.UserID}</h3>
                 </div>
                 <div className="row">
                     <div className="column">
                         <h4>Technical Skills</h4>
                         <ul id="lists">
-                            <li>Skill 1</li>
-                            <li>Skill 2</li>
-                            <li>Skill 3</li>
+                            <li>{this.state.Skills[0]}</li>
+                            <li>{this.state.Skills[1]}</li>
+                            <li>{this.state.Skills[2]}</li>
                         </ul>
                         <h4>Past Projects</h4>
                         <ul id="lists">
                             <li>Project 1</li>
-                            <li>Project2</li>
-                            <li>Project3</li>
+                            <li>Project 2</li>
+                            <li>Project 3</li>
                         </ul>
                     </div>
                     <div className="column">
                         <h4>Detailed Info</h4>
                         <table>
                             <tbody>
-                                <tr>{/*userinfo.First}</tr>
-                                <tr>Address 1</tr>
-                                <tr>Address 2</tr>
+                                <tr>{this.state.First}</tr>
+                                <tr>Address" {this.state.Address}</tr>
                                 <tr>
-                                    <td>City</td>
-                                    <td>State</td>
-                                    <td>Zip</td>
+                                    <td>City: {this.state.City}</td>
+                                    <td>State: {this.state.State}</td>
+                                    <td>Zip" {this.state.Zipcode} </td>
                                 </tr>   
-                                <tr>Email (BUTTON FOR EMAIL)</tr> 
-                                <tr>Phone #</tr>
-                                <tr>{userinfo.Team*/}</tr>
-                                <tr>Link to user's github</tr>
+                                <tr>Email: {this.state.Email}</tr> 
+                                <tr>Phone: {this.state.Phone} #</tr>
+                                <tr>Team: {this.state.Team}</tr>
+                                <tr>Github Username: {this.state.Github}</tr>
                             </tbody>   
                         </table>
                         <p>User's Bio</p>                        

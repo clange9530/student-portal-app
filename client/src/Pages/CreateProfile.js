@@ -19,6 +19,7 @@ class CreateProfile extends Component{
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
+    
     /*
     let fetchData = {
         method: 'POST',
@@ -26,6 +27,7 @@ class CreateProfile extends Component{
         headers: new Headers()
     } 
     */   
+   
     handleSubmit = (e) => {
         e.preventDefault();
         fetch('/api/users/')
