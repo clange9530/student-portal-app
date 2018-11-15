@@ -3,53 +3,56 @@ import React, { Component } from 'react';
 //Import statement to import profile picture from Amazon s3.
 
 class Users extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            UserID: '',
-            Password: '',
-            First: '',
-            Last: '',
-            Address: '',
-            City:'',
-            State:'',
-            Zipcode:'',
-            Phone:'',
-            Email:'',
-            Github:'',
-            Team:'',
-            Bio:''
-        }
+    state = {
+        UserID: '',
+        Skills: [],
+        First: '',
+        Last: '',
+        Address: '',
+        City: '',
+        State: '',
+        Zipcode: '',
+        Phone: '',
+        Email: '',
+        Github: '',
+        Team: ''
     }
-    /*
+    
+    
     componentDidMount(){
-        this.getUserData();
-    }
-
-    getUserData = () => {
-        fetch('/api/users/user2')
-        .then(resp => resp.json())
+        fetch('/api/users/user1')
+        .then(res => res.json())
         .then(User => this.setState({ 
-            UserID: User.UserID, 
+            Skills: User.Skills,
+            UserID: User.UserID,
             First: User.First,
             Last: User.Last,
             Address: User.Address,
             City: User.City,
             State: User.State,
-            Zipcode:User.Zipcode,
+            Zipcode: User.Zipcode,
             Phone: User.Phone,
             Email: User.Email,
             Github: User.Github,
-            Team: User.Team,
-            Bio: User.Bio  
-        }));
+            Team: User.Team
+        }))
+        .catch(err => console.log(err));
     }
+
+    /*
+    getUserData = async () => {
+        const response = await fetch('api/users/user1');
+        const body = await JSON.stringify(response);
+        console.log(body);
+        return body;
+    }   
     */
     render() {
+        const userinfo = this.state;
         return(
             <div>
                 <div className="row">
-                    <h3 class="header">{this.state.UserID}</h3>
+                    <h3 class="header">{userinfo.UserID}</h3>
                 </div>
                 <div className="row">
                     <div className="column">
@@ -69,18 +72,20 @@ class Users extends Component {
                     <div className="column">
                         <h4>Detailed Info</h4>
                         <table>
-                            <tr>{this.state.First}</tr>
-                            <tr>Address 1</tr>
-                            <tr>Address 2</tr>
-                            <tr>
-                                <td>City</td>
-                                <td>State</td>
-                                <td>Zip</td>
-                            </tr>   
-                            <tr>Email (BUTTON FOR EMAIL)</tr> 
-                            <tr>Phone #</tr>
-                            <tr>{this.state.Team}</tr>
-                            <tr>Link to user's github</tr>
+                            <tbody>
+                                <tr>{/*userinfo.First}</tr>
+                                <tr>Address 1</tr>
+                                <tr>Address 2</tr>
+                                <tr>
+                                    <td>City</td>
+                                    <td>State</td>
+                                    <td>Zip</td>
+                                </tr>   
+                                <tr>Email (BUTTON FOR EMAIL)</tr> 
+                                <tr>Phone #</tr>
+                                <tr>{userinfo.Team*/}</tr>
+                                <tr>Link to user's github</tr>
+                            </tbody>   
                         </table>
                         <p>User's Bio</p>                        
                     </div>
