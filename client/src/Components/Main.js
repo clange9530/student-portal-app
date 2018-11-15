@@ -12,8 +12,8 @@ const Main = () => (
             <Route exact path='/' component={Home}/>
             <Route path='/teams' component={Teams}/>
             <Route path='/users' component={Users}/>
-            <Route path="/sendmail/:id?" component={SendMail} />
-            <Route path="/listmail" component={ListMail} />            
+            <Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
+            <Route path="/listmail/:projectId" component={ListMail} />
         </Switch>
     </main>
 )

@@ -30,8 +30,8 @@ function BasicExample() {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/topics" component={Topics} />
-        <Route path="/sendmail/:id?" component={SendMail} />
-        <Route path="/listmail" component={ListMail} />
+        <Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
+        <Route path="/listmail/:projectId" component={ListMail} />
       </div>
     </Router>
   );

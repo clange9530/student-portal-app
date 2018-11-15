@@ -19,7 +19,11 @@ class ListMail extends React.Component {
 
     componentDidMount() {
 
-        fetch("/api/email/566372f4d11de3498e2941c9")    // TODO: Make project id dynamic
+        var { match: { params } } = this.props;
+        
+        this.projectId = params.projectId;
+
+        fetch("/api/email/" + this.projectId) 
             .then(response => response.json())
             .then(emails => {
                 console.log(emails);
@@ -39,19 +43,19 @@ class ListMail extends React.Component {
                     return (
                         <tr key={em._id}>
                             <td>
-                                <Link className="email-list-item" to={"/sendmail/"+em._id}>
+                                <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
                                     <i className="material-icons mdc-button__icon" aria-hidden="true">
                                         { iconName }
                                     </i>
                                 </Link>
                             </td>
                             <td className="email-date-sent-column">
-                                <Link className="email-list-item" to={"/sendmail/"+em._id}>
+                                <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
                                     {dateSent.toDateString()} 
                                 </Link>
                             </td>
                             <td>
-                                <Link className="email-list-item" to={"/sendmail/"+em._id}>
+                                <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
                                     {em.subject}
                                 </Link>
                             </td>
@@ -89,7 +93,7 @@ class ListMail extends React.Component {
                     </AppBar>
                     <Grid container direction="column" spacing={16} className="email-grid">
                         <Grid item md={12}>
-                            <Link to="/sendmail">
+                            <Link to={"/sendmail/" + this.projectId}>
                                 <Button variant="contained" style={style} color="primary" >
                                     <i className="material-icons mdc-button__icon" aria-hidden="true">mail_outline</i>
                                     New message

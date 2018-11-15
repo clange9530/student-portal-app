@@ -30,12 +30,14 @@ class SendMail extends React.Component {
     componentDidMount() {
         var { match: { params } } = this.props;
 
-        var emailId = params.id;
+        var emailId = params.emailId;
+
+        this.projectId = params.projectId;
         
         if (emailId) {
             console.log("Viewing existing email");
 
-            fetch("/api/email/566372f4d11de3498e2941c9/" + emailId)     // TODO: Make project ID dynamic
+            fetch("/api/email/" + this.projectId + "/" + emailId)
                 .then(response => response.json())
                 .then(body => {
                     var dateSent = new Date(body.date_sent);
@@ -73,7 +75,7 @@ class SendMail extends React.Component {
         } else if (this.state.emailBody === "") {
             alert("Please enter a message to send.");
         } else {
-            fetch('api/email/566372f4d11de3498e2941c9', {   // TODO: Make project id dynamic
+            fetch('/api/email/' + this.projectId, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
