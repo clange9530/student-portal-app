@@ -5,6 +5,7 @@ import Home from '../Pages/Home';
 import Teams from '../Pages/Teams';
 import SendMail from './SendMail';
 import ListMail from './ListMail';
+import StudentSurvey from './StudentSurvey';
 
 const Main = () => (
     <main>
@@ -14,6 +15,7 @@ const Main = () => (
             <Route path='/users' component={Users}/>
             <Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
             <Route path="/listmail/:projectId" component={ListMail} />
+            <Route path="/studentsurvey/:projectId" component={StudentSurvey} />
         </Switch>
     </main>
 )

@@ -3,9 +3,9 @@ var path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
-    config = require('./config');
-    emailRouter = require('./routes/email.server.routes')
-    // getCoordinates = require('../controllers/coordinates.server.controller.js');
+    config = require('./config'),
+    apiRouter = require('./routes/api.server.routes');
+
 const basicAuth = require('express-basic-auth');
 
 module.exports.init = function() {
@@ -25,9 +25,9 @@ module.exports.init = function() {
 
   /* serve static files */
 
-  /* use the email router for requests to the api */
-  /* TODO: Should we have a single API router for all of the API calls? */
-  app.use('/api/email', emailRouter);
+  /* use the api router for requests to the api */
+  /* This router handles all requests for any api controller */
+  app.use('/api', apiRouter);
 
 /*Auth*/
 /* Uncomment for auth - probably a mongo query here Steven will take that.
