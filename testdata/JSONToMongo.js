@@ -13,7 +13,8 @@ var fs = require('fs'),
     mongoose = require('mongoose'), 
     Schema = mongoose.Schema, 
     config = require('../server/config'),
-    StudentSurvey = require('../server/models/studentsurvey.server.model');
+    StudentSurvey = require('../server/models/studentsurvey.server.model'),
+    ClientSurvey = require('../server/models/clientsurveyresponse.server.model');
 
 
 /* Connect to the MongoDB */
@@ -25,8 +26,22 @@ var surveys = JSON.parse(fs.readFileSync('./studentsurvey.json', 'utf8'));
 for (var i = 0, len = surveys.entries.length; i < len; i++) {
   var l = new StudentSurvey(surveys.entries[i]);
 
-      l.save(function(err) {
+  l.save(function(err) {
     if (err) throw err;
-    console.log('Survey saved successfully.');
+    console.log('Student survey saved successfully.');
   });
 }
+
+// Save client surveys
+var clientSurveys = JSON.parse(fs.readFileSync('./clientsurvey.json', 'utf8'));
+
+for (var i = 0, len = clientSurveys.entries.length; i < len; i++) {
+  var l = new ClientSurvey(clientSurveys.entries[i]);
+
+  l.save(function(err) {
+    if (err) throw err;
+    console.log('Client survey saved successfully.');
+  });
+}
+
+
