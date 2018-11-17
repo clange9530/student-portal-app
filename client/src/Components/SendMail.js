@@ -12,7 +12,10 @@ class SendMail extends React.Component {
     constructor(props) {
         super(props);
 
+        this.props = props;
+
         this.state = {
+            isNewEmail: false,
             emailStatus: 'Not sent',
             emailDateSent: '',
             emailFrom: '',
@@ -24,14 +27,38 @@ class SendMail extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    ValidateEmail(mail)
+    componentDidMount() {
+        var { match: { params } } = this.props;
+
+        var emailId = params.emailId;
+
+        this.projectId = params.projectId;
+        
+        if (emailId) {
+            console.log("Viewing existing email");
+
+            fetch("/api/email/" + this.projectId + "/" + emailId)
+                .then(response => response.json())
+                .then(body => {
+                    var dateSent = new Date(body.date_sent);
+
+                    this.setState({emailStatus: body.status});
+                    this.setState({emailDateSent: dateSent});
+                    this.setState({emailFrom: body.sender});
+                    this.setState({emailTo: body.recipient});
+                    this.setState({emailSubject: body.subject});
+                    this.setState({emailBody: body.body});
+                });
+
+        } else {
+            console.log("Creating new email");
+            this.setState({isNewEmail: true});
+        }
+    }
+
+    ValidateEmail(mail) 
     {
-        // var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        // return mail.match(mailformat);
-        // return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-        //alert(mail);
-        var re = /^(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
-        return re.test(mail);
+        return (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,24})+$/.test(mail))
     }
 
     sendMessage() {
@@ -48,7 +75,7 @@ class SendMail extends React.Component {
         } else if (this.state.emailBody === "") {
             alert("Please enter a message to send.");
         } else {
-            fetch('api/email', {
+            fetch('/api/email/' + this.projectId, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -62,7 +89,8 @@ class SendMail extends React.Component {
                 })
             })
             alert("Message sent.");
-        }
+            this.handleGoBack();
+        }        
     }
 
     handleChange(event) {
@@ -72,6 +100,10 @@ class SendMail extends React.Component {
 
         this.setState({[name]: value});
         console.log(name, value);
+    }
+
+    handleGoBack() {
+        this.props.history.goBack();
     }
 
     render() {
@@ -84,105 +116,130 @@ class SendMail extends React.Component {
             border: '2px solid #000000'
           };
 
+        let newMailButton;
+        let cancelButtonText;
+        let cancelButtonIcon;
+        let dateSentInput;
+        let title;
+
+        console.log("Is New Email?" + this.isNewEmail);
+
+        if (this.state.isNewEmail) {
+            console.log("Creating new email button");
+
+            title = "Send Email";
+
+            cancelButtonText = "Cancel";
+            cancelButtonIcon = "clear";
+
+            newMailButton = 
+                <Button variant="contained" style={style} color="primary" onClick={this.sendMessage.bind(this)}>
+                    <i className="material-icons mdc-button__icon" aria-hidden="true">send</i>
+                    Send message
+                </Button>;
+            dateSentInput = null;
+        } else {
+            title = "View Email";
+            cancelButtonText = "Go back";
+            cancelButtonIcon = "arrow_back";
+            newMailButton = <div />;
+            dateSentInput = 
+                <Grid item md={12}>
+                    <label className="display-label" htmlFor="emailDateSent">Date sent</label>
+                    <Input 
+                        className="text-input" 
+                        name="emailDateSent" 
+                        id="emailDateSent"
+                        title="Date sent"
+                        readOnly
+                        value={this.state.emailDateSent} 
+                    />
+                </Grid>
+        }
+
         return (
             <div style={{divStyle}} className="column1">
                 <Card>
                     <AppBar position="static" >
                         <Toolbar variant="dense">
                             <Typography variant="title" color="inherit">
-                            Send Email
+                            {title}
                             </Typography>
                         </Toolbar>
                     </AppBar>
-                    <Grid container direction="column" spacing={16} className="add-building">
+                    <Grid container direction="column" spacing={16} className="email-grid">
                         <Grid item md={12}>
-                            <Button variant="contained" style={style} color="primary" onClick={this.sendMessage.bind(this)}>
-                                <i class="material-icons mdc-button__icon" aria-hidden="true">send</i>
-                                Send message
-                            </Button>
-                            <Button variant="outline" style={style} color="primary" onClick={this.handleClear}>
-                                <i class="material-icons mdc-button__icon" aria-hidden="true">clear</i>
-                                Cancel
+                            {newMailButton}
+                            <Button variant="outlined" style={style} color="primary" onClick={this.handleGoBack.bind(this)}>
+                                <i className="material-icons mdc-button__icon" aria-hidden="true">{cancelButtonIcon}</i>
+                                {cancelButtonText}
                             </Button>
                         </Grid>
                         <Grid item md={12}>
                             <label className="display-label" htmlFor="emailStatus">Status</label>
-                            <Input
-                                inputType="text"
-                                className="text-input"
-                                name="emailStatus"
+                            <Input 
+                                className="text-input" 
+                                name="emailStatus" 
                                 id="emailStatus"
                                 title="Status"
                                 value={this.state.emailStatus}
                                 readOnly
                             />
                         </Grid>
-                        <Grid item md={12}>
-                            <label className="display-label" htmlFor="emailDateSent">Date sent</label>
-                            <Input
-                                inputType="text"
-                                className="text-input"
-                                name="emailDateSent"
-                                id="emailDateSent"
-                                title="Date sent"
-                                readOnly
-                                value={this.state.emailDateSent}
-                            />
-                        </Grid>
+                        {dateSentInput}
                         <Grid item md={12}>
                             <label className="display-label" htmlFor="emailFrom">Sender</label>
-                            <Input
-                                inputType="text"
-                                className="text-input"
-                                name="emailFrom"
+                            <Input 
+                                className="text-input" 
+                                name="emailFrom" 
                                 id="emailFrom"
                                 title="From"
-                                value={this.state.emailFrom}
-                                onChange={this.handleChange}
+                                value={this.state.emailFrom} 
+                                onChange={this.handleChange} 
+                                readOnly = {!this.state.isNewEmail}
                                 placeholder="Enter the sender's email address"
                             />
                         </Grid>
                         <Grid item md={12}>
                             {/* TODO: need to figure out how to get this to format correctly with a better label */}
                             <label className="display-label" htmlFor="emailTo">Recipient</label>
-                            <Input
-                                inputType="text"
-                                className="text-input"
-                                name="emailTo"
+                            <Input 
+                                className="text-input" 
+                                name="emailTo" 
                                 id="emailTo"
                                 title="To"
-                                value={this.state.emailTo}
-                                onChange={this.handleChange}
+                                value={this.state.emailTo} 
+                                onChange={this.handleChange} 
+                                readOnly = {!this.state.isNewEmail}
                                 placeholder="Enter the recipient's email address"
                             />
                         </Grid>
                         <Grid item md={12}>
                             <label className="display-label" htmlFor="emailSubject">Subject</label>
-                            <Input
-                                inputType="text"
-                                className="text-input"
-                                name="emailSubject"
+                            <Input 
+                                className="text-input" 
+                                name="emailSubject" 
                                 id="emailSubject"
                                 title="Subject"
-                                value={this.state.emailSubject}
-                                onChange={this.handleChange}
+                                value={this.state.emailSubject} 
+                                onChange={this.handleChange} 
+                                readOnly = {!this.state.isNewEmail}
                                 placeholder="Enter the subject for the message"
                             />
                         </Grid>
                         <Grid item md={12}>
                             <label className="display-label" htmlFor="emailBody">Body</label>
                             {/* TODO: Figure out if another react or material Ui component would work better here */}
-                            <textarea
-                                //inputType="text"
-                                className="text-area"
-                                name="emailBody"
+                            <textarea 
+                                className="text-area" 
+                                name="emailBody" 
                                 id="emailBody"
                                 title="Body"
                                 rows={8}
                                 wrap="soft"
-                                value={this.state.emailBody}
-                                onChange={this.handleChange}
-                                //placeholder="Enter the message"
+                                value={this.state.emailBody} 
+                                onChange={this.handleChange} 
+                                readOnly = {!this.state.isNewEmail}
                             />
                         </Grid>
                     </Grid>

@@ -17,22 +17,21 @@ exports.send = function(req, res) {
         email.status = "Error";
     }
 
+    email.project_id = req.params.projectId;
+
     /* Then save the email */
     email.save(function(err) {
         if(err) {
             console.log(err);
             res.status(500).send(err);
         } else {
-            // TODO: Should we return the sent email or a simple status message?
             res.json(email);
         }
     });
 };
 
 exports.list = function(req, res) {
-
-    /* Your code here */
-    Email.find({}, function(err, emails) {
+    Email.find({ project_id: req.params.projectId }, function(err, emails) {
         // Set response status to 404
         if (err) {
             res.status(404).send(err);
@@ -41,3 +40,23 @@ exports.list = function(req, res) {
         }
     });
 };
+
+exports.read = function(req, res) {
+
+    var emailId = req.params.emailId;
+    var projectId = req.params.projectId;
+
+    Email.findById(emailId).exec(function(err, email) {
+        if(err) {
+            console.log(err);
+            res.status(404).send(err);
+          } else {
+            if (email.project_id === projectId) {
+                res.json(email);
+            } else {
+                res.status(404).send();
+            }
+
+        }
+    });
+}

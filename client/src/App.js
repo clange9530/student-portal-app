@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import SendMail from "./Components/SendMail"
+import ListMail from "./Components/ListMail"
 
 function BasicExample() {
   return (
@@ -19,6 +20,9 @@ function BasicExample() {
           <li>
             <Link to="/sendmail">Send email</Link>
           </li>
+          <li>
+            <Link to="/listmail">View emails</Link>
+          </li>
         </ul>
 
         <hr />
@@ -26,7 +30,8 @@ function BasicExample() {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/topics" component={Topics} />
-        <Route path="/sendmail" component={SendMail} />
+        <Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
+        <Route path="/listmail/:projectId" component={ListMail} />
       </div>
     </Router>
   );
