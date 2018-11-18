@@ -6,6 +6,7 @@ import Teams from '../Pages/Teams';
 import SendMail from './SendMail';
 import ListMail from './ListMail';
 import StudentSurvey from './StudentSurvey';
+import ClientSurvey from './ClientSurvey';
 
 const Main = () => (
     <main>
@@ -16,6 +17,7 @@ const Main = () => (
             <Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
             <Route path="/listmail/:projectId" component={ListMail} />
             <Route path="/studentsurvey/:projectId" component={StudentSurvey} />
+            <Route path="/clientsurvey/:projectId" component={ClientSurvey} />
         </Switch>
     </main>
 )
