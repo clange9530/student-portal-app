@@ -3,6 +3,9 @@ var path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
+    urlencoded_body_parser = bodyParser.urlencoded({
+      extended: true
+    }),
     config = require('./config');
     emailRouter = require('./routes/email.server.routes');
     userRouter = require('./routes/user.server.routes');
@@ -21,6 +24,7 @@ module.exports.init = function() {
 
   //body parsing middleware
   app.use(bodyParser.json());
+  app.use(urlencoded_body_parser);
 
 /*Server connection to Amazon S3
 

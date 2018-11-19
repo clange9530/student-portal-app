@@ -20,7 +20,8 @@ var UserSchema = new Schema({
   Email:String,
   Github:String,
   Team:String,
-  Bio:String
+  Bio: String,
+  Skill: [String]
 },
 {collection: 'users'}
 );

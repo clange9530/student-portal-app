@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-//Import statement to import API that will GET data for individual profile from MongoDB.
 //Import statement to import profile picture from Amazon s3.
-
 class Users extends Component {
     constructor(){
         super();
@@ -17,28 +15,16 @@ class Users extends Component {
             Phone: '',
             Email: '',
             Github: '',
-            Team: ''
+            Team: '',
+            Bio: ''
         };
     }
-    /*
-    state = {
-        UserID: '',
-        Skills: [],
-        First: '',
-        Last: '',
-        Address: '',
-        City: '',
-        State: '',
-        Zipcode: '',
-        Phone: '',
-        Email: '',
-        Github: '',
-        Team: ''
-    }
-    */
-    
+       
+    //User parameter of URL will pull from "onClick" when looking at list of 
+    //users or team members, so that each name will be a link to this generic page
+    //which will fill with relevant info.
     componentDidMount(){
-        fetch('/api/users/user4')
+        fetch('/api/users/user1')
         .then(response => response.json())
         .then(UserData => {
             var User = UserData[0];
@@ -54,15 +40,14 @@ class Users extends Component {
             Phone: User.Phone,
             Email: User.Email,
             Github: User.Github,
-            Team: User.Team
-        })
+            Team: User.Team,
+            Bio: User.Bio
+            })
         })
         .catch(err => console.log(err));
     }
 
-    
     render() {
-        
         return(
             <div>
                 <div className="row">
@@ -72,9 +57,7 @@ class Users extends Component {
                     <div className="column">
                         <h4>Technical Skills</h4>
                         <ul id="lists">
-                            <li>{this.state.Skills[0]}</li>
-                            <li>{this.state.Skills[1]}</li>
-                            <li>{this.state.Skills[2]}</li>
+                            {this.state.Skills.map((item,i) => <li key={i}>{item}</li>)}
                         </ul>
                         <h4>Past Projects</h4>
                         <ul id="lists">
@@ -87,8 +70,8 @@ class Users extends Component {
                         <h4>Detailed Info</h4>
                         <table>
                             <tbody>
-                                <tr>{this.state.First}</tr>
-                                <tr>Address" {this.state.Address}</tr>
+                                <tr>Name: {this.state.First} {this.state.Last}</tr>
+                                <tr>Address: {this.state.Address}</tr>
                                 <tr>
                                     <td>City: {this.state.City}</td>
                                     <td>State: {this.state.State}</td>
@@ -100,12 +83,10 @@ class Users extends Component {
                                 <tr>Github Username: {this.state.Github}</tr>
                             </tbody>   
                         </table>
-                        <p>User's Bio</p>                        
+                        <p>Bio: <br/> {this.state.Bio} </p>                        
                     </div>
                     <div className="column">
                         <h4>Profile Pic</h4>
-                        <button>Upload</button>
-
                     </div>
                 </div>
             </div>

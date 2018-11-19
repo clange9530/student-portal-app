@@ -13,26 +13,43 @@ class CreateProfile extends Component{
         Phone:'',
         Email:'',
         Github:'',
-        Bio:''
+        Bio:'',
+        Team: '',
+        Skills: []
     }
 
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
     
-    /*
-    let fetchData = {
-        method: 'POST',
-        body: this.state,
-        headers: new Headers()
-    } 
-    */   
-   
+
     handleSubmit = (e) => {
         e.preventDefault();
-        fetch('/api/users/')
-        .then()
-        
+        var User = this.state;
+        fetch('/api/users/', {
+            method: 'POST',
+            body: JSON.stringify(User),
+            headers: {"content-type": "application/json"}
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+        this.setState({
+            UserID: '',
+            Password: '',
+            First: '',
+            Last: '',
+            Address: '',
+            City:'',
+            State:'',
+            Zipcode:'',
+            Phone:'',
+            Email:'',
+            Github:'',
+            Bio:'',
+            Skills: [],
+            Team: ''
+        });
     }
 
     render() {
@@ -74,6 +91,17 @@ class CreateProfile extends Component{
                         <br/>
                         <label>Github Username:</label>
                         <input type="text" name="Github" onChange={this.handleChange}/>
+                        <br/>
+                        <br/>
+                        <label>Skills:</label>
+                        <input type="text" name="Skills" onChange={this.handleChange}/>
+                        <br/>
+                        <br/>
+                        <label>Team:</label>
+                        <input type="text" name="Team" onChange={this.handleChange}/>
+                        <label>Bio:</label>
+                        <input type="text" name="Bio" onChange={this.handleChange}/>
+                        <button onClick={this.handleSubmit}>Create New User</button>
                     </form>
                 </div>
                 <div className="column">
