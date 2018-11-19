@@ -8,7 +8,6 @@ var path = require('path'),
     }),
     config = require('./config'),
     apiRouter = require('./routes/api.server.routes');
-    userRouter = require('./routes/user.server.routes');
 
     const basicAuth = require('express-basic-auth');
 
@@ -33,8 +32,6 @@ module.exports.init = function() {
   /* use the api router for requests to the api */
   /* This router handles all requests for any api controller */
   app.use('/api', apiRouter);
-  app.use('/api/users', userRouter);
-  app.use('/api/users/userID', userRouter.param);
 
 /*Auth*/
 /* Uncomment for auth - probably a mongo query here Steven will take that.
