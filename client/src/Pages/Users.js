@@ -24,7 +24,7 @@ class Users extends Component {
     //users or team members, so that each name will be a link to this generic page
     //which will fill with relevant info.
     componentDidMount(){
-        fetch('/api/users/user1')
+        fetch('/api/users/clange')
         .then(response => response.json())
         .then(UserData => {
             var User = UserData[0];
@@ -49,45 +49,40 @@ class Users extends Component {
 
     render() {
         return(
-            <div>
-                <div className="row">
-                    <h3 class="header">{this.state.UserID}</h3>
+            <div className="row">
+                <div className="column">
+                    <h4>Technical Skills</h4>
+                    <ul id="lists">
+                        {this.state.Skills.map((item,i) => <li key={i}>{item}</li>)}
+                    </ul>
+                    <h4>Past Projects</h4>
+                    <ul id="lists">
+                        <li>Project 1</li>
+                        <li>Project 2</li>
+                        <li>Project 3</li>
+                    </ul>
                 </div>
-                <div className="row">
-                    <div className="column">
-                        <h4>Technical Skills</h4>
-                        <ul id="lists">
-                            {this.state.Skills.map((item,i) => <li key={i}>{item}</li>)}
-                        </ul>
-                        <h4>Past Projects</h4>
-                        <ul id="lists">
-                            <li>Project 1</li>
-                            <li>Project 2</li>
-                            <li>Project 3</li>
-                        </ul>
-                    </div>
-                    <div className="column">
-                        <h4>Detailed Info</h4>
-                        <table>
-                            <tbody>
-                                <tr>Name: {this.state.First} {this.state.Last}</tr>
-                                <tr>Address: {this.state.Address}</tr>
-                                <tr>
-                                    <td>City: {this.state.City}</td>
-                                    <td>State: {this.state.State}</td>
-                                    <td>Zip" {this.state.Zipcode} </td>
-                                </tr>   
-                                <tr>Email: {this.state.Email}</tr> 
-                                <tr>Phone: {this.state.Phone} #</tr>
-                                <tr>Team: {this.state.Team}</tr>
-                                <tr>Github Username: {this.state.Github}</tr>
-                            </tbody>   
-                        </table>
-                        <p>Bio: <br/> {this.state.Bio} </p>                        
-                    </div>
-                    <div className="column">
-                        <h4>Profile Pic</h4>
-                    </div>
+                <div className="column">
+                    <h3>{this.state.UserID}'s Info:</h3>
+                    <table>
+                        <tbody>
+                            <tr><td>Name: {this.state.First} {this.state.Last}</td></tr>
+                            <tr><td>Address: {this.state.Address}</td></tr>
+                            <tr><td>City: {this.state.City}</td></tr>
+                            <tr>
+                                <td>State: {this.state.State}</td>
+                                <td>Zip: {this.state.Zipcode} </td>
+                            </tr>   
+                            <tr><td>Email: {this.state.Email}</td></tr> 
+                            <tr><td>Phone: {this.state.Phone}</td></tr>
+                            <tr><td>Team: {this.state.Team}</td></tr>
+                            <tr><td>Github Username: {this.state.Github}</td></tr>
+                        </tbody>   
+                    </table>
+                    <p>Bio: <br/> {this.state.Bio} </p>                        
+                </div>
+                <div className="column">
+                    <h4>Profile Pic</h4>
                 </div>
             </div>
         )
