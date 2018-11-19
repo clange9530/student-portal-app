@@ -1,37 +1,95 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 
-const Teams = () => (
+
+class Teams extends Component {
+
+     constructor(props){
+          super(props);
+
+          this.state = {
+               _id: "",
+               teamName: "",
+               members: [],
+               projects: [],
+               skills: [],
+               prod_mgr: "",
+               scrum_mstr: "",
+               primary_cont: "",
+               gitHub_repo: ""
+          };
+     }
+
+
+     componentDidMount() {
+          this.getTeamInfo();
+                    console.log(this.state.teamName);
+     }
+
+getTeamInfo = () => {
+     fetch('/api/teams/5bf24cd3e876b806a9de6f8f')
+          .then(response => {
+               console.log(response);
+               return response.json()
+          })
+          .then(Team => this.setState( {
+               _id: Team._id,
+               teamName: Team.teamName,
+               members: Team.members,
+               projects: Team.projects,
+               skills: Team.skills,
+               prod_mgr: Team.prod_mgr,
+               scrum_mstr: Team.scrum_mstr,
+               primary_cont: Team.primary_cont,
+               gitHub_repo: Team.gitHub_repo
+          }));
+}
+
+
+render() {
+     return (
      <div>
        <div className="row">
-           <h3 class="header">Team Profile</h3>
+           <h3 class="header">{this.state.teamName}</h3>
        </div>
 
         <div className="row">
             <div className="column">
                 <h4>Team Members</h4>
                 <ul id="lists">
-                    <li>Name 1</li>
-                    <li>Name 2</li>
-                    <li>Name 3</li>
+                     {
+                          this.state.members.map((val, index) => {
+                               return(
+                                    <li key={index}>
+                                        {val}
+                                    </li>
+                               );
+                          })
+                     }
                 </ul>
                 <h4>Team Profile</h4>
-                <ul id="lists">
-                    <li>Skill 1</li>
-                    <li>Skill 2</li>
-                    <li>Skill 3</li>
-                </ul>
+                     <ul id="lists">
+                          {
+                               this.state.skills.map((val, index) => {
+                                    return(
+                                         <li key={index}>
+                                             {val}
+                                         </li>
+                                    );
+                               })
+                          }
+                     </ul>
             </div>
             <div className="column">
                 <th>Detailed Info</th>
                 <table>
                     <th>Product Manager:</th>
-                    <tr>Manager Name </tr>
+                    <tr>{this.state.prod_mgr} </tr>
                     <th>Scrum Master:</th>
-                    <tr>Scrum Master Name </tr>
+                    <tr>{this.state.scrum_mstr} </tr>
                     <th>Primary Contact:</th>
-                    <tr>Primary Contact Name </tr>
+                    <tr>{this.state.primary_cont} </tr>
                     <tr>Primary Contact Address 1 </tr>
                     <tr><td>City</td> <td>State</td> <td>,</td> <td>Zip Code</td></tr>
                     <tr>Primary Contact Phone #</tr>
@@ -52,4 +110,8 @@ const Teams = () => (
 
     </div>
 )
+}
+}
+
+
 export default Teams;

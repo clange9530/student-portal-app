@@ -7,6 +7,7 @@ var path = require('path'),
       extended: true
     }),
     config = require('./config'),
+    teamRouter = require('./routes/teams.server.routes'),
     apiRouter = require('./routes/api.server.routes');
 
     const basicAuth = require('express-basic-auth');
@@ -22,6 +23,7 @@ module.exports.init = function() {
   app.use(morgan('dev'));
 
   //body parsing middleware
+  app.use(bodyParser.urlencoded({extended: false}));
   app.use(bodyParser.json());
   app.use(urlencoded_body_parser);
 
@@ -32,6 +34,7 @@ module.exports.init = function() {
   /* use the api router for requests to the api */
   /* This router handles all requests for any api controller */
   app.use('/api', apiRouter);
+  app.use('/teams', teamRouter);
 
 /*Auth*/
 /* Uncomment for auth - probably a mongo query here Steven will take that.
