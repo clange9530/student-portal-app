@@ -13,12 +13,15 @@ code {
     monospace;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 /*Navbar styling*/
 .header {
   margin: auto;
   position: relative;
-  width: 50%;
+	width: 70%;
 }
 
 .row {
@@ -55,6 +58,11 @@ code {
   background: lightgray;
   margin-bottom: 50px;
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
 * {
 	box-sizing: border-box;
 }
@@ -137,6 +145,7 @@ td:hover {
 .email-list-item {
   text-decoration: none;
   color: inherit;
+<<<<<<< HEAD
 }
 
 .button {
@@ -153,3 +162,6 @@ td:hover {
 .button:hover {
 	background: #ddd;
 }
+=======
+}
+>>>>>>> master
