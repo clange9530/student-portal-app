@@ -20,17 +20,9 @@ var UserSchema = new Schema({
   Email:String,
   Github:String,
   Team:String,
-<<<<<<< HEAD
-  Bio: String,
-  Skill: [String]
-},
-{collection: 'users'}
-);
-=======
   Bio:String,
   Skills:Array
-});
->>>>>>> master
+},{collection: 'users'});
 
 
 var User = mongoose.model('User', UserSchema);
