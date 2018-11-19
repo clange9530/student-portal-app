@@ -1,9 +1,9 @@
 //Dependencies.
 var User = require('../models/userModel.js'),
-    mongoose = require(mongoose);
+    mongoose = require('mongoose');
 
 module.exports.userByID = function(req, res, next, _id) {
-    User.findById(_id, function(err, user) {
+    User.find({UserID: _id}, function(err, user) {
         if(err) {
         console.log(err);
         res.status(400).send(err);
@@ -23,7 +23,8 @@ module.exports.create = function(req, res) {
         console.log(err);
         res.status(400).send(err);
       } else {
-        res.json(user);
+        res.json(user)
+        console.log(user)
       }
     });
   };
@@ -63,7 +64,7 @@ module.exports.create = function(req, res) {
     }});
   };
   
-  /* Retreive all the directory users, sorted alphabetically by user code */
+  /* Retreive users, sorted alphabetically by user code */
   module.exports.list = function(req, res) {
     /* Your code here */
     console.log('Finding users');

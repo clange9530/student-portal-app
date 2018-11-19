@@ -3,10 +3,13 @@ var path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
+    urlencoded_body_parser = bodyParser.urlencoded({
+      extended: true
+    }),
     config = require('./config'),
     apiRouter = require('./routes/api.server.routes');
 
-const basicAuth = require('express-basic-auth');
+    const basicAuth = require('express-basic-auth');
 
 module.exports.init = function() {
   //connect to database
@@ -20,6 +23,7 @@ module.exports.init = function() {
 
   //body parsing middleware
   app.use(bodyParser.json());
+  app.use(urlencoded_body_parser);
 
 /*Server connection to Amazon S3
 

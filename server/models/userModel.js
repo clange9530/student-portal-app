@@ -8,7 +8,6 @@ UserSchema
 	mongodb has 16mb limit so profile pic should be addressed before hand when a user clicks create
   */
 var UserSchema = new Schema({
-  /* Your code here */ 
   UserID: { type: String, unique: true },
   Password: String,
   First: String,
@@ -23,7 +22,7 @@ var UserSchema = new Schema({
   Team:String,
   Bio:String,
   Skills:Array
-});
+},{collection: 'users'});
 
 
 var User = mongoose.model('User', UserSchema);
