@@ -10,23 +10,25 @@ exports.send = function(req, res) {
     var email = new Email(req.body);
 
     /* Send the email and update status appropriately */
-    if (emailHelper.send(req.body)) {
-        email.status = "Sent";
-        email.date_sent = new Date();
-    } else {
-        email.status = "Error";
-    }
-
-    email.project_id = req.params.projectId;
-
-    /* Then save the email */
-    email.save(function(err) {
-        if(err) {
-            console.log(err);
-            res.status(500).send(err);
+    emailHelper.send(req.body, function(success) {
+        if (success) {
+            email.status = "Sent";
+            email.date_sent = new Date();
         } else {
-            res.json(email);
+            email.status = "Error";
         }
+
+        email.project_id = req.params.projectId;
+
+        /* Then save the email */
+        email.save(function(err) {
+            if(err) {
+                console.log(err);
+                res.status(500).send(err);
+            } else {
+                res.json(email);
+            }
+        });
     });
 };
 

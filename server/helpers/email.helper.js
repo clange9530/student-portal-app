@@ -1,45 +1,48 @@
 
 /* Dependencies */
-// var sendpulse = require("sendpulse-api");
-    // config = require('./config');
-
-// var TOKEN_STORAGE = "/tmp/";
+var nodemailer = require("nodemailer"),
+    config = require('../config');
 
 // Function used to abstract the calling code away from the implementation
 // of whatever API (or SMTP functionality) we are using
-module.exports.send = function(message) {
-
-    // TODO: Need to wire up the actual API we will be using
-    // var answerGetter = function(data) {
-    //     console.log(data);
-    // }
-
-    // sendpulse.init(API_USER_ID,API_SECRET,TOKEN_STORAGE);
-
-    // var email = {
-    //     "html" : "<h1>Example text</h1>",
-    //     "text" : "Example text",
-    //     "subject" : "Example subject",
-    //     "from" : {
-    //         "name" : "Alex",
-    //         "email" : "some@domain.com"
-    //     },
-    //     "to" : [
-    //         {
-    //             "name" : "Piter",
-    //             "email" : "8bxjcmuphk@liamekaens.com"
-    //         },
-    //     ],
-    //     "bcc" : [
-    //         {
-    //             "name" : "John",
-    //             "email" : "some@domain.info"
-    //         },
-    //     ]
-    // };
-
-    // sendpulse.smtpSendMail(answerGetter,email);
+module.exports.send = function(message, callback) {
 
     console.log(message);
-    return true;
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: config.smtp.server,
+        port: config.smtp.port,
+        secure: (config.smtp.useSSL === 1), // true for 465, false for other ports
+        auth: {
+            user: config.smtp.username,
+            pass: config.smtp.password
+        }
+    });
+    
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: message.sender,
+        to: message.recipient,
+        subject: message.subject,
+        text: message.body,
+        html: message.body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log('Error sending message:');
+            console.log(error);
+            callback(false);
+        } else {
+            console.log('Message sent:');
+            console.log(info);
+
+            // Preview only available when sending through an Ethereal account
+            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    
+            callback(true);    
+        }
+    });
 };
