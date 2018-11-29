@@ -102,6 +102,7 @@ class StudentSurvey extends React.Component {
 
         return (
             <div>
+                {questionList}
                 <Button variant="contained" style={style} color="primary" onClick={this.submitSurvey.bind(this)}>
                     <i className="material-icons mdc-button__icon" aria-hidden="true">arrow_forward</i>
                     Submit Survey
@@ -110,7 +111,6 @@ class StudentSurvey extends React.Component {
                     <i className="material-icons mdc-button__icon" aria-hidden="true">clear</i>
                     Cancel
                 </Button>
-                {questionList}
             </div>
         )
     }
