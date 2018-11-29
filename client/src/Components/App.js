@@ -27,28 +27,23 @@ class App extends React.Component {
 
  
 
-  render() {
-    
+  render() { 
     return (
-	<Router>
-	<div>
-	<Header/>
-
-	<Route exact path='/' component={Home}/>
-	<Route path='/teams' component={Teams}/>
-	<Route path='/users' component={Users}/>
-	<Route path='/createProfile' component={CreateProfile}/>
-	<Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
-	<Route path="/listmail/:projectId" component={ListMail} />
-	<Route path="/studentsurvey/:projectId" component={StudentSurvey} />
-	<Route path="/clientsurvey/:projectId" component={ClientSurvey} />
-
-
-
-	
-      
-      </div>
-	</Router>
+			<Router>
+				<div>
+					<Header/>
+					<div>
+						<Route exact path='/' component={Home}/>
+						<Route path='/teams' component={Teams}/>
+						<Route path='/users' component={Users}/>
+						<Route path='/createProfile' component={CreateProfile}/>
+						<Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
+						<Route path="/listmail/:projectId" component={ListMail} />
+						<Route path="/studentsurvey/:projectId" component={StudentSurvey} />
+						<Route path="/clientsurvey/:projectId" component={ClientSurvey} />
+					</div>		
+      	</div>
+			</Router>
     );
   }
 }

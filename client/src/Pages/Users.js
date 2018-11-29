@@ -51,16 +51,8 @@ class Users extends Component {
         return(
             <div className="row">
                 <div className="column">
-                    <h4>Technical Skills</h4>
-                    <ul id="lists">
-                        {this.state.Skills.map((item,i) => <li key={i}>{item}</li>)}
-                    </ul>
-                    <h4>Past Projects</h4>
-                    <ul id="lists">
-                        <li>Project 1</li>
-                        <li>Project 2</li>
-                        <li>Project 3</li>
-                    </ul>
+                    <h4>Profile Pic</h4>
+                    <button>Add Profile Picture</button>
                 </div>
                 <div className="column">
                     <h3>{this.state.UserID}'s Info:</h3>
@@ -82,7 +74,16 @@ class Users extends Component {
                     <p>Bio: <br/> {this.state.Bio} </p>                        
                 </div>
                 <div className="column">
-                    <h4>Profile Pic</h4>
+                    <h4>Technical Skills</h4>
+                    <ul id="lists">
+                        {this.state.Skills.map((item,i) => <li key={i}>{item}</li>)}
+                    </ul>
+                    <h4>Past Projects</h4>
+                    <ul id="lists">
+                        <li>Project 1</li>
+                        <li>Project 2</li>
+                        <li>Project 3</li>
+                    </ul>
                 </div>
             </div>
         )
