@@ -208,6 +208,18 @@ class CreateProfile extends Component{
                         />
                     </Grid>
                     <Grid item md={12}>
+                        <label className="display-label">Team</label>
+                        <Input 
+                            className="text-input" 
+                            name="Team" 
+                            title="Team"
+                            value={this.state.Team} 
+                            onChange={this.handleChange}
+                            placeholder="Enter the team that you are on"
+                            fullWidth={false}
+                        />
+                    </Grid>
+                    <Grid item md={12}>
                         <label className="display-label">Skills</label>
                         {this.state.Skills.map((skill, index) => (
                                 <div>
