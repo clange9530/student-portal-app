@@ -98,6 +98,12 @@ td:hover {
   margin: 1rem;
 }
 
+.email-list {
+	float: left;
+  padding: 0px 20px 20px 0px;
+  margin: 1rem;
+}
+
 .display-label {
 	font-weight: bold;
 }
@@ -117,6 +123,18 @@ td:hover {
 	padding: 6px 12px;
 	width: calc(100% - 2rem);
 	height: 34px;
+}
+
+.error { border: 1px solid red; }
+
+.validation-error {
+	font-size: 12px;
+	font-weight: bold;
+	color: red;
+}
+
+.validation-error-hidden {
+	display: none;
 }
 
 .text-area {
@@ -145,7 +163,15 @@ td:hover {
 }
 
 .email-subject-column {
-	width: 75%;
+	width: 50%;
+}
+
+.email-sender-column {
+	width: 25%;
+}
+
+.email-recipient-column {
+	width: 25%;
 }
 
 .email-list-item {
