@@ -31,18 +31,30 @@ class ListMail extends React.Component {
                 var emailList = emails.map(em => 
                 {
                     var iconName = "";
-                    if (em.status === "Sent")
-                        iconName = "check";
-                    else if (em.status === "Error")
+                    var statusTooltip = "";
+                    if (em.status === "Sent") {
+                        iconName = "";
+                    }
+                    else if (em.status === "Error") {
                         iconName = "error_outline";
-                    else if (em.status === "") 
+                        statusTooltip = "Error sending email";
+                    }
+                    else if (em.status === "")  {
                         iconName = "timer";
+                    }
             
-                    var dateSent = new Date(em.date_sent);
+                    var dateSent;
+
+                    if (em.date_sent) 
+                        dateSent = (new Date(em.date_sent)).toDateString();
+                    else
+                        dateSent = "";
+
+                    console.log(em.date_sent);
 
                     return (
                         <tr key={em._id}>
-                            <td>
+                            <td title={statusTooltip}>
                                 <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
                                     <i className="material-icons mdc-button__icon" aria-hidden="true">
                                         { iconName }
@@ -51,12 +63,22 @@ class ListMail extends React.Component {
                             </td>
                             <td className="email-date-sent-column">
                                 <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
-                                    {dateSent.toDateString()} 
+                                    {dateSent} 
                                 </Link>
                             </td>
                             <td>
                                 <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
                                     {em.subject}
+                                </Link>
+                            </td>
+                            <td>
+                                <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
+                                    {em.sender}
+                                </Link>
+                            </td>
+                            <td>
+                                <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
+                                    {em.recipient}
                                 </Link>
                             </td>
                         </tr>
@@ -81,7 +103,7 @@ class ListMail extends React.Component {
         return (
 
 
-            <div style={{divStyle}} className="column1">
+            <div style={{divStyle}} className="email-list">
                 <Card>
                     <AppBar position="static" >
                         <Toolbar variant="dense">
@@ -115,6 +137,8 @@ class ListMail extends React.Component {
                                     <th></th>
                                         <th className="email-date-sent-column">Date sent</th>
                                         <th className="email-subject-column">Subject</th>
+                                        <th className="email-sender-column">Sender</th>
+                                        <th className="email-recipient-column">Recipient</th>
                                     </tr>
                                 </thead>
 
