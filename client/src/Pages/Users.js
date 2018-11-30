@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 //Import statement to import profile picture from Amazon s3.
 class Users extends Component {
     constructor(){
@@ -71,7 +72,8 @@ class Users extends Component {
                             <tr><td>Github Username: {this.state.Github}</td></tr>
                         </tbody>   
                     </table>
-                    <p>Bio: <br/> {this.state.Bio} </p>                        
+                    <p>Bio: <br/> {this.state.Bio} </p>     
+                    <Link to={{pathname: '/CreateProfile', state: {data: this.state}}}>Edit profile</Link>                   
                 </div>
                 <div className="column">
                     <h4>Technical Skills</h4>

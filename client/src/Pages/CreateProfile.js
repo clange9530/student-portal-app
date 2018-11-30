@@ -20,7 +20,31 @@ class CreateProfile extends Component{
         Github:'',
         Bio:'',
         Team: '',
-        Skills: [{name: ''}]
+        Skills: [{name: ''}],
+        Options: 'POST'
+    }
+
+    componentDidMount () {
+        const { data } = this.props.location.state;
+        if (data !== null){
+            this.setState({
+                UserID: data.UserID,
+                Password: data.Password,
+                First: data.First,
+                Last: data.Last,
+                Address: data.Address,
+                City: data.City,
+                State: data.State,
+                Zipcode: data.Zipcode,
+                Phone: data.Phone,
+                Email: data.Email,
+                Github: data.Github,
+                Bio: data.Bio,
+                Team: data.Team,
+                Skills: data.Skills,
+                Options: 'PUT'
+            });
+        }
     }
 
     handleChange = (e) => {
@@ -53,7 +77,7 @@ class CreateProfile extends Component{
         e.preventDefault();
         var User = this.state;
         fetch('/api/users/', {
-            method: 'POST',
+            method: this.state.Options,
             body: JSON.stringify(User),
             headers: {"content-type": "application/json"}
         })
@@ -78,7 +102,9 @@ class CreateProfile extends Component{
         });
     }
 
-    render() {      
+    render() {     
+        
+        
         return(
             <div className="column1">
                 <AppBar position="static" >
