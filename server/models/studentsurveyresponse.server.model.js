@@ -7,6 +7,8 @@ var mongoose = require('mongoose'),
 var studentSurveyResponseSchema = new Schema({
     project_id: { type: String, required: true },
     student_id: { type: String, required: true },
+    student_name: String,
+    date_submitted: Date,
     questions: [{
         question_number: Number,
         question_prompt: String,

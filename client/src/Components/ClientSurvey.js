@@ -31,14 +31,7 @@ class ClientSurvey extends React.Component {
                         return (
                             <div key={questionKey}>
                                 <label className="display-label" htmlFor={questionKey}>{questionText}</label>
-                                <Input 
-                                    className="text-input" 
-                                    name={q.question_number}
-                                    id={questionKey}
-                                    title={questionText}
-                                    value={q.question_response} 
-                                    readOnly
-                                />
+                                <div><p>{q.question_response}</p></div>
                             </div>
                         );
                     });

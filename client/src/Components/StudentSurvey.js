@@ -9,6 +9,7 @@ class StudentSurvey extends React.Component {
         this.handleChange = this.handleChange.bind(this);
 
         this.state = {
+            isNewSurvey: false,
             questionList: null,
             questions: null
         };
@@ -18,24 +19,55 @@ class StudentSurvey extends React.Component {
         // Get project id from params
         var { match: { params } } = this.props;
         
+        var surveyId = params.surveyId;
+
         this.projectId = params.projectId;
         this.studentId = "1234567890";         // TODO: Need this to be passed in
 
-        // Get survey questions from API
-        fetch("/api/studentsurvey/" + this.projectId)
-            .then(response => response.json())
-            .then(survey => {
-                
-                // Build list of questions with placeholders for responses
-                var questions = survey.questions
-                .map(q => { return {
-                    question_number: q.question_number,
-                    question_prompt: q.question_prompt,
-                    question_response: ""
-                }});
+        if (surveyId) {
+            console.log("Viewing existing survey");
 
-                this.setState({questions: questions});
-            });
+            // Get survey responses from API
+            fetch("/api/studentsurvey/" + this.projectId + "/" + surveyId)
+                .then(response => response.json())
+                .then(survey => {
+
+                    // Build list of questions with placeholders for responses
+                    var questions = survey.questions
+                    .map(q => { return {
+                        question_number: q.question_number,
+                        question_prompt: q.question_prompt,
+                        question_response: q.question_response
+                    }});
+
+                    this.setState({
+                        questions: questions,
+                        isNewSurvey: false
+                    });
+                })
+
+        } else {
+            console.log("Submitting new survey");
+
+            // Get survey questions from API
+            fetch("/api/studentsurvey/questions/" + this.projectId)
+                .then(response => response.json())
+                .then(survey => {
+                    
+                    // Build list of questions with placeholders for responses
+                    var questions = survey.questions
+                    .map(q => { return {
+                        question_number: q.question_number,
+                        question_prompt: q.question_prompt,
+                        question_response: ""
+                    }});
+
+                    this.setState({
+                        questions: questions,
+                        isNewSurvey: true
+                    });
+                });
+        }
     }
 
     submitSurvey() {
@@ -81,10 +113,10 @@ class StudentSurvey extends React.Component {
                 .map((q, index) => {
                     var questionKey = "question" + q.question_number;
                     var questionText = q.question_number + ". " + q.question_prompt;
+                    var input;
 
-                    return (
-                        <div key={questionKey}>
-                            <label className="display-label" htmlFor={questionKey}>{questionText}</label>
+                    if (this.state.isNewSurvey) {
+                        input = 
                             <Input 
                                 className="text-input" 
                                 name={q.question_number}
@@ -92,7 +124,15 @@ class StudentSurvey extends React.Component {
                                 title={questionText}
                                 value={q.question_response} 
                                 onChange={this.handleChange(index)}    
-                            />
+                            />;
+                    } else {
+                        input = <div><p>{q.question_response}</p></div>;
+                    }
+
+                    return (
+                        <div key={questionKey}>
+                            <label className="display-label" htmlFor={questionKey}>{questionText}</label>
+                            {input}
                         </div>
                     );
                 });
@@ -100,15 +140,32 @@ class StudentSurvey extends React.Component {
             questionList = <div />
         }
 
-        return (
-            <div>
+        var cancelButtonText;
+        var cancelButtonIcon;
+        var submitSurveyButton;
+
+        if (this.state.isNewSurvey) {
+            cancelButtonText = "Cancel";
+            cancelButtonIcon = "clear";
+
+            submitSurveyButton = 
                 <Button variant="contained" style={style} color="primary" onClick={this.submitSurvey.bind(this)}>
                     <i className="material-icons mdc-button__icon" aria-hidden="true">arrow_forward</i>
                     Submit Survey
-                </Button>            
+                </Button>;
+
+        } else {
+            cancelButtonText = "Go back";
+            cancelButtonIcon = "arrow_back";
+            submitSurveyButton = <div />;
+        }
+
+        return (
+            <div>
+                {submitSurveyButton}
                 <Button variant="outlined" style={style} color="primary" onClick={this.handleGoBack.bind(this)}>
-                    <i className="material-icons mdc-button__icon" aria-hidden="true">clear</i>
-                    Cancel
+                    <i className="material-icons mdc-button__icon" aria-hidden="true">{cancelButtonIcon}</i>
+                    {cancelButtonText}
                 </Button>
                 {questionList}
             </div>
