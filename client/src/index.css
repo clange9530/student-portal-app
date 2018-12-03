@@ -21,7 +21,7 @@ code {
 }
 
 .row {
-  margin: 1rem;
+	margin: 1rem
 }
 
 .navBar {
@@ -38,6 +38,7 @@ code {
   width: 33.33%;
 }
 
+
 .row:after {
   content: "";
   display: table;
@@ -47,27 +48,12 @@ code {
 
 /*User profile styles.*/
 #lists {
-  margin: 10px;
-  border: 3px solid black;
-  padding: 5px;
   list-style-position: inside;
-  background: lightgray;
-  margin-bottom: 50px;
+	background: lightgray;
 }
-
-#userForm {
-	input[type=text]{
-		width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-	}
+#lists:hover{
+	background: white
 }
-
-
 
 * {
 	box-sizing: border-box;

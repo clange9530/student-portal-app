@@ -8,7 +8,9 @@ var path = require('path'),
     }),
     config = require('./config'),
     teamRouter = require('./routes/teams.server.routes'),
-    apiRouter = require('./routes/api.server.routes');
+    apiRouter = require('./routes/api.server.routes'),
+    loginRouter = require('./routes/login.server.routes'),
+    projectRouter=require('./routes/projects.server.routes');
 
     const basicAuth = require('express-basic-auth');
 
@@ -35,6 +37,8 @@ module.exports.init = function() {
   /* This router handles all requests for any api controller */
   app.use('/api', apiRouter);
   app.use('/teams', teamRouter);
+  app.use('/login',loginRouter);
+  app.use('/projects',projectRouter);
 
 /*Auth*/
 /* Uncomment for auth - probably a mongo query here Steven will take that.

@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-//Import statement to import profile picture from Amazon s3.
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
+
 class Users extends Component {
     constructor(){
         super();
         this.state = {
             UserID: '',
-            Skills: [],
+            Skills: [{name: '123'}, {name: 'dev'}, {name: 'ops'}],
+            Projects: [{name: '123'}, {name: 'dev'}, {name: 'ops'}],
             First: '',
             Last: '',
             Address: '',
@@ -21,9 +34,6 @@ class Users extends Component {
         };
     }
        
-    //User parameter of URL will pull from "onClick" when looking at list of 
-    //users or team members, so that each name will be a link to this generic page
-    //which will fill with relevant info.
     componentDidMount(){
         fetch('/api/users/clange')
         .then(response => response.json())
@@ -48,46 +58,86 @@ class Users extends Component {
         .catch(err => console.log(err));
     }
 
+    
+
     render() {
         return(
-            <div className="row">
+            <div className="row" >
                 <div className="column">
-                    <h4>Profile Pic</h4>
-                    <button>Add Profile Picture</button>
+                    <Grid container direction="column">
+                        <Grid item md>
+                            <Typography>Profile pic goes here</Typography>
+                        </Grid>
+                        <Grid item md>
+                            <Button variant="contained" size="small">Add Profile Pic</Button>
+                        </Grid>
+                        <Grid item md>
+                            <label className="display-label">Bio</label>
+                            <p>{this.state.Bio}</p>
+                        </Grid>
+                    </Grid>
                 </div>
                 <div className="column">
-                    <h3>{this.state.UserID}'s Info:</h3>
-                    <table>
-                        <tbody>
-                            <tr><td>Name: {this.state.First} {this.state.Last}</td></tr>
-                            <tr><td>Address: {this.state.Address}</td></tr>
-                            <tr><td>City: {this.state.City}</td></tr>
-                            <tr>
-                                <td>State: {this.state.State}</td>
-                                <td>Zip: {this.state.Zipcode} </td>
-                            </tr>   
-                            <tr><td>Email: {this.state.Email}</td></tr> 
-                            <tr><td>Phone: {this.state.Phone}</td></tr>
-                            <tr><td>Team: {this.state.Team}</td></tr>
-                            <tr><td>Github Username: {this.state.Github}</td></tr>
-                        </tbody>   
-                    </table>
-                    <p>Bio: <br/> {this.state.Bio} </p>     
-                    <Link to={{pathname: '/CreateProfile', state: {data: this.state}}}>Edit profile</Link>                   
+                    <Grid container direction="column">
+                        <Grid item md>
+                            <label className="display-label">{this.state.UserID}'s Personal Info</label>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>{this.state.First} {this.state.Last}</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>{this.state.Email}</TableCell>
+                                    <TableCell>{this.state.Github}</TableCell>
+                                    <TableCell>{this.state.Phone}</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>{this.state.Address}</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>{this.state.City}</TableCell>
+                                    <TableCell>{this.state.State}</TableCell>
+                                    <TableCell>{this.state.Zipcode}</TableCell>
+                                </TableRow>
+                            </TableHead>
+                        </Grid>
+                        <Grid item sm>
+                            <Button 
+                                variant="contained" 
+                                size="medium" 
+                                component={Link} 
+                                to={{pathname: '/CreateProfile', state: {data: this.state}}}
+                            >
+                                Edit Profile
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </div>
                 <div className="column">
-                    <h4>Technical Skills</h4>
-                    <ul id="lists">
-                        {this.state.Skills.map((item,i) => <li key={i}>{item}</li>)}
-                    </ul>
-                    <h4>Past Projects</h4>
-                    <ul id="lists">
-                        <li>Project 1</li>
-                        <li>Project 2</li>
-                        <li>Project 3</li>
-                    </ul>
+                    <Grid container direction="column">
+                        <Grid item md>
+                            <List>
+                                <label className="display-label">Technical Skills</label>
+                                {this.state.Skills.map((item,i) => 
+                                    <ListItem id="lists" key={i}>
+                                        <ListItemText>{item.name}</ListItemText>    
+                                    </ListItem>
+                                )} 
+                            </List>
+                        </Grid>
+                        <Grid item md>
+                            <List>
+                                <label className="display-label">Past Projects</label>
+                                {this.state.Projects.map((item,i) => 
+                                    <ListItem id="lists" key={i}>
+                                        <ListItemText>{item.name}</ListItemText>    
+                                    </ListItem>
+                                )} 
+                            </List>
+                        </Grid>
+
+                    </Grid>
                 </div>
-            </div>
+            </div> 
         )
     }
 }
