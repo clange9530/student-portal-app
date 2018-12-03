@@ -9,13 +9,16 @@ import SendMail from './SendMail';
 import ListMail from './ListMail';
 import StudentSurvey from './StudentSurvey';
 import ClientSurvey from './ClientSurvey';
+import TeamSkills from './TeamSkills';
+import Login from './login';
+import CreateProject from './CreateProject';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
 	//user['_id']
-	user:{_id:'5be1bdea467109bf4fb7e242'}
+	user:{_id:"",logged:false,teamid:''}
     };
   }
 
@@ -42,6 +45,21 @@ class App extends React.Component {
 	<Route path="/listmail/:projectId" component={ListMail} />
 	<Route path="/studentsurvey/:projectId" component={StudentSurvey} />
 	<Route path="/clientsurvey/:projectId" component={ClientSurvey} />
+	<Route path='/teamskills' component={TeamSkills}/>
+	<Route
+        path="/login"
+        render={props => 
+	<Login 
+	idget={this.getid.bind(this)}
+	/>}
+      	/>
+	<Route path="/create_project"
+ 	render={props => 
+	<CreateProject
+	user={this.state.user}
+	/>
+	}
+	/>
 
 
 
