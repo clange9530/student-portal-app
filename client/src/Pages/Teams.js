@@ -10,7 +10,7 @@ class Teams extends Component {
           this.state = {
                _id: "",
                teamName: "",
-               members: [{name: 'Craig Lange', userID: 'clange'}],
+               members: [{name: '', userID: ''}],
                projects: [],
                skills: [],
                prod_mgr: "",
