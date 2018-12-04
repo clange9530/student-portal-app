@@ -7,11 +7,10 @@ class Teams extends Component {
 
      constructor(props){
           super(props);
-
           this.state = {
                _id: "",
                teamName: "",
-               members: [],
+               members: [{name: 'Craig Lange', userID: 'clange'}],
                projects: [],
                skills: [],
                prod_mgr: "",
@@ -36,7 +35,7 @@ getTeamInfo = () => {
           .then(Team => this.setState( {
                _id: Team._id,
                teamName: Team.teamName,
-               members: Team.members,
+               //members: Team.members,
                projects: Team.projects,
                skills: Team.skills,
                prod_mgr: Team.prod_mgr,
@@ -56,18 +55,19 @@ render() {
 
         <div className="row">
             <div className="column">
-                <h4>Team Members</h4>
-                <ul id="lists">
-                     {
-                          this.state.members.map((val, index) => {
-                               return(
-                                    <li key={index}>
-                                        {val}
-                                    </li>
-                               );
-                          })
-                     }
-                </ul>
+               <h4>Team Members</h4>
+                    <ul id="lists">{
+                         this.state.members.map((val, index) => {
+                              return(
+                                   <li key={index}>
+                                        <Link to={{pathname: '/Users', state: {userid: val.userID}}}>
+                                        {val.name}
+                                        </Link>
+                                   </li>
+                              );
+                         })
+                    }
+                    </ul>
                 <h4>Team Profile</h4>
                      <ul id="lists">
                           {

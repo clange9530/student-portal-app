@@ -41,8 +41,7 @@ class CreateProfile extends Component{
                 Github: data.Github,
                 Bio: data.Bio,
                 Team: data.Team,
-                Skills: data.Skills,
-                Options: 'PUT'
+                Skills: data.Skills
             });
         }
     }
@@ -77,7 +76,7 @@ class CreateProfile extends Component{
         e.preventDefault();
         var User = this.state;
         fetch('/api/users/', {
-            method: this.state.Options,
+            method: 'POST',
             body: JSON.stringify(User),
             headers: {"content-type": "application/json"}
         })
@@ -98,13 +97,12 @@ class CreateProfile extends Component{
             Github:'',
             Bio:'',
             Skills: [{name: ''}],
-            Team: ''
+            Team: '',
+            Options: 'POST'
         });
     }
 
     render() {     
-        
-        
         return(
             <div className="column1">
                 <AppBar position="static" >

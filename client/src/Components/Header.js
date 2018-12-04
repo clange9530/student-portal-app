@@ -5,6 +5,7 @@ const Header = () => (
   <header class="header">
     <nav>
       <ul>
+        <li class="navBar"><Link to='/teams'>Teams</Link></li>
         <li class="navBar"><Link to='/'   >Home</Link></li>
         <li class="navBar"><Link to='/users'>Individual Profiles</Link></li>
         <li class="navBar"><Link to='/teamskills'>Team skills</Link></li>

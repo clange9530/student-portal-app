@@ -18,8 +18,8 @@ class Users extends Component {
         super();
         this.state = {
             UserID: '',
-            Skills: [{name: '123'}, {name: 'dev'}, {name: 'ops'}],
-            Projects: [{name: '123'}, {name: 'dev'}, {name: 'ops'}],
+            Skills: [],
+            Projects: [],
             First: '',
             Last: '',
             Address: '',
@@ -35,7 +35,8 @@ class Users extends Component {
     }
        
     componentDidMount(){
-        fetch('/api/users/clange')
+        const id = this.props.location.state.userid;
+        fetch('/api/users/' + id)
         .then(response => response.json())
         .then(UserData => {
             var User = UserData[0];
@@ -81,24 +82,28 @@ class Users extends Component {
                     <Grid container direction="column">
                         <Grid item md>
                             <label className="display-label">{this.state.UserID}'s Personal Info</label>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>{this.state.First} {this.state.Last}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell>{this.state.Email}</TableCell>
-                                    <TableCell>{this.state.Github}</TableCell>
-                                    <TableCell>{this.state.Phone}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell>{this.state.Address}</TableCell>
-                                </TableRow>
-                                <TableRow>
-                                    <TableCell>{this.state.City}</TableCell>
-                                    <TableCell>{this.state.State}</TableCell>
-                                    <TableCell>{this.state.Zipcode}</TableCell>
-                                </TableRow>
-                            </TableHead>
+                            <Table>
+                                <TableBody>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>{this.state.First} {this.state.Last}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>{this.state.Email}</TableCell>
+                                            <TableCell>{this.state.Github}</TableCell>
+                                            <TableCell>{this.state.Phone}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>{this.state.Address}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>{this.state.City}</TableCell>
+                                            <TableCell>{this.state.State}</TableCell>
+                                            <TableCell>{this.state.Zipcode}</TableCell>
+                                        </TableRow>
+                                    </TableHead>  
+                                </TableBody>   
+                            </Table> 
                         </Grid>
                         <Grid item sm>
                             <Button 

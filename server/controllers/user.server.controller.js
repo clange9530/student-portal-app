@@ -39,13 +39,25 @@ module.exports.create = function(req, res) {
   module.exports.update = function(req, res) {
     var user = req.user;
     user = {
-      
-    };
-    var id = new mongoose.Types.ObjectId(user.userID);
-    User.findByIdAndUpdate({_id: id}, user, function(err) {
+      UserID: req.UserID,
+      Password: req.Password,
+      First: req.First,
+      Last: req.Last,
+      Address: req.Address,
+      City: req.City,
+      State: req.State,
+      Zipcode: req.Zipcode,
+      Phone: req.Phone,
+      Email: req.Email,
+      Github: req.Github,
+      Team: req.Team,
+      Bio: req.Bio,
+      Skills: req.Skills
+    }
+    User.findOneAndUpdate({UserID: user.UserID}, user, function(err) {
       if(err) {
         console.log(err);
-        res.status(404).send(err);
+        res.status(404).send(err.body);
       } else {
         res.send('User updated');
       }
