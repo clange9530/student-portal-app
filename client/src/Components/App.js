@@ -14,6 +14,7 @@ import TeamSkills from './TeamSkills';
 import Login from './login';
 import CreateProject from './CreateProject';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -40,8 +41,14 @@ class App extends React.Component {
 					<Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
 					<Route path="/listmail/:projectId" component={ListMail} />
 					<Route path="/studentsurvey/:projectId/:surveyId?" component={StudentSurvey} />
-					<Route path="/clientsurvey/:projectId" component={ClientSurvey} />
-					<Route path="/project/:projectId" component={Project} />      
+					<Route path="/clientsurvey/:projectId" component={ClientSurvey}/>
+					<Route path="/project/:projectId" 
+						render={props => 
+						<Project
+							user={this.state.user}
+							params={props.match}
+						/>}
+					/>    
 					<Route path='/teamskills' component={TeamSkills}/>
 					<Route
 						path="/login"
@@ -53,12 +60,13 @@ class App extends React.Component {
 					<Route path="/create_project"
 						render={props => 
 						<CreateProject
-							user={this.state.user}
+							user={this.state.user}	
 						/>
 						}
 					/>
       	</div>
 			</Router>
+
 
     );
   }
