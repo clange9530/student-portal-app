@@ -3,8 +3,9 @@
 
 /* Dependencies */
 var mongoose = require('mongoose'), 
-    Project = require('../models/projectModel.js');
-var ReadProjectModel = require('../models/project.server.model');
+    Project = require('../models/projectModel.js'),
+    Team = require('../models/teamModel.js'),
+    ReadProjectModel = require('../models/project.server.model');
 
 exports.read = function(req, res) {
     var projectId = req.params.projectId;
@@ -18,6 +19,38 @@ exports.read = function(req, res) {
         }
     });
 }
+
+exports.list_members = function(req, res) {
+
+	
+	var projectId = req.params.projectId;
+	console.log(projectId);
+	Project.findById(projectId).exec(function(err, project) {
+        if (err) {
+            console.log(err);
+            res.status(404).send(err);
+        } 
+	else {
+	console.log(project);
+          Team.findById(project["teamid"]).exec(function (err, team) {
+	if (err) {
+            console.log(err);
+            res.status(404).send(err);
+        	}
+	else{
+			console.log(projectId);
+			console.log(team);
+			var list=team["members"]
+			list.push(project["creatorID"]);
+			res.status(200).send({list:list})
+		}
+	
+	   })
+        }
+    })
+
+
+};
 
 /* create project */
 exports.create = function(req, res) {

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Button from '@material-ui/core/Button';
 import TeamSkills from './TeamSkills';
 
 class Login extends React.Component {
@@ -51,17 +51,24 @@ this.handleResponse(res.res,res.id,res.teamid,true);
 	var getid=this.props.idget
     return (
 <div>
+	<br></br>
+	<br></br>
+	<br></br>
 	<div>
       <form onSubmit={this.handleSubmit}>
         <label>
           Name:
           <input type="text" value={this.state.name} onChange={this.handleChangen} />
         </label>
+	<div>
 	<label>
           Password:
-          <input type="text" value={this.state.password} onChange={this.handleChangep} />
+          <input type="password" value={this.state.password} onChange={this.handleChangep} />
         </label>
-        <input type="submit" value="Submit" />
+	</div>
+ 	<br></br>
+	<Button color="primary" variant="contained" type="submit"> login</Button> 
+
       </form>
 	</div>
 <div>
