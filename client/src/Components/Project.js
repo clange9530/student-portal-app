@@ -1,6 +1,7 @@
 import React from 'react';
 import ListMail from './ListMail';
 import ListSurveys from './ListSurveys';
+import ProjectDocumentation from './ProjectDocumentation';
 
 class Project extends React.Component {
     constructor(props) {
@@ -11,7 +12,8 @@ class Project extends React.Component {
 
         this.state = {
             projectName: "",
-            clientName: ""
+            clientName: "",
+            description: ""
         }
     }
 
@@ -24,7 +26,8 @@ class Project extends React.Component {
 
                 this.setState({
                     projectName: body.name,
-                    clientName: body.client_name
+                    clientName: body.client_name,
+                    description: body.description
                 });
             });
     }
@@ -34,12 +37,13 @@ class Project extends React.Component {
             <div>
                 <p><label className="display-label">Project: </label>{this.state.projectName}</p>
                 <p><label className="display-label">Client: </label>{this.state.clientName}</p>
+                <p><label className="display-label">Description: </label>{this.state.description}</p>
                 <br />
                 {/* TODO: Set maximum height on email list */}
                 <ListMail projectId={this.projectId} />
                 <br />
                 <ListSurveys  projectId={this.projectId} />
-
+                <ProjectDocumentation projectId={this.projectId} />
             </div>
         )
     }

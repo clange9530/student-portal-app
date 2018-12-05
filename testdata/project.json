@@ -4,7 +4,8 @@
         {
             "_id": "566372f4d11de3498e2941c9", 
             "name": "Student Portal App",
-            "client_name": "Dr. Gardner-McCune"
+            "client_name": "Dr. Gardner-McCune",
+            "description": "This project is focused on creating a student & team portal for the WebApps@ UF Client & Team Project Management App. This app will allow potential clients and selected clients to create organizational profiles, manage project, and upload and share docs with their client."
         }
     ]
 }
