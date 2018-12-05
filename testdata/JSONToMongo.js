@@ -11,37 +11,58 @@
 
 var fs = require('fs'),
     mongoose = require('mongoose'), 
-    Schema = mongoose.Schema, 
     config = require('../server/config'),
     StudentSurvey = require('../server/models/studentsurvey.server.model'),
-    ClientSurvey = require('../server/models/clientsurveyresponse.server.model');
+    ClientSurvey = require('../server/models/clientsurveyresponse.server.model'),
+    Project = require('../server/models/project.server.model'),
+    StudentSurveyResponse = require('../server/models/studentsurveyresponse.server.model');
 
+const commonCallback = function(message, err) {
+  if (err) throw err;
+  console.log(message);
+}
+    
+const deleteCallback = function(err) {
+  commonCallback("Deleted all documents.", err);
+};
+
+const saveCallback = function(err) {
+  commonCallback("Object saved successfully.", err);
+}
+
+const handleSave = function(json, model) {
+  for (var i = 0, len = json.entries.length; i < len; i++) {
+    var l = new model(json.entries[i]);
+  
+    l.save(saveCallback);
+  }
+}
+
+const processData = function(filepath, model) {
+  var json = JSON.parse(fs.readFileSync(filepath, 'utf8'));
+
+  if (json.overwrite == "1") {
+    model.remove({}, function(err) {
+      deleteCallback(err);
+      handleSave(json, model);
+    });
+  } else {
+    handleSave(json, model);
+  }
+
+}
 
 /* Connect to the MongoDB */
 mongoose.connect(config.db.uri);
 
 // Save student surveys
-var surveys = JSON.parse(fs.readFileSync('./studentsurvey.json', 'utf8'));
-
-for (var i = 0, len = surveys.entries.length; i < len; i++) {
-  var l = new StudentSurvey(surveys.entries[i]);
-
-  l.save(function(err) {
-    if (err) throw err;
-    console.log('Student survey saved successfully.');
-  });
-}
+processData('./studentsurvey.json', StudentSurvey);
 
 // Save client surveys
-var clientSurveys = JSON.parse(fs.readFileSync('./clientsurvey.json', 'utf8'));
+processData('./clientsurvey.json', ClientSurvey);
 
-for (var i = 0, len = clientSurveys.entries.length; i < len; i++) {
-  var l = new ClientSurvey(clientSurveys.entries[i]);
+// Save projects
+processData('./project.json', Project);
 
-  l.save(function(err) {
-    if (err) throw err;
-    console.log('Client survey saved successfully.');
-  });
-}
-
-
+// Save student survey responses
+processData('./studentsurveyresponses.json', StudentSurveyResponse);
