@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -12,16 +12,33 @@ class ListMail extends React.Component {
     constructor(props) {
         super(props);
 
+        // This construct will let us get the project ID from the URL if we are calling this component
+        // as a page, or from props if it is a component embedded in another page.
+        if (this.props.match) {
+            var { match: { params } } = this.props;
+            this.projectId = params.projectId;
+        } else {
+            const { projectId } = this.props;
+            this.projectId = projectId;
+        }
+
+        console.log("Project id: ",this.projectId);
+
+        this.navigate = this.navigate.bind(this);
+
         this.state = {
             emailList: null
         };
     }
 
+    navigate(path) {
+        console.log("Navigating to ", path);
+        this.props.history.push(path);
+    }
+
     componentDidMount() {
 
-        var { match: { params } } = this.props;
-        
-        this.projectId = params.projectId;
+        console.log("ListMail componentDidMount")
 
         fetch("/api/email/" + this.projectId) 
             .then(response => response.json())
@@ -53,33 +70,23 @@ class ListMail extends React.Component {
                     console.log(em.date_sent);
 
                     return (
-                        <tr key={em._id}>
+                        <tr key={em._id} onClick={() => this.navigate("/sendmail/" + this.projectId + "/" + em._id)}>
                             <td title={statusTooltip}>
-                                <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
-                                    <i className="material-icons mdc-button__icon" aria-hidden="true">
-                                        { iconName }
-                                    </i>
-                                </Link>
+                                <i className="material-icons mdc-button__icon" aria-hidden="true">
+                                    { iconName }
+                                </i>
                             </td>
                             <td className="email-date-sent-column">
-                                <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
-                                    {dateSent} 
-                                </Link>
+                                {dateSent} 
                             </td>
                             <td>
-                                <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
-                                    {em.subject}
-                                </Link>
+                                {em.subject}
                             </td>
                             <td>
-                                <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
-                                    {em.sender}
-                                </Link>
+                                {em.sender}
                             </td>
                             <td>
-                                <Link className="email-list-item" to={"/sendmail/" + this.projectId + "/" + em._id}>
-                                    {em.recipient}
-                                </Link>
+                                {em.recipient}
                             </td>
                         </tr>
                     );
@@ -87,7 +94,6 @@ class ListMail extends React.Component {
 
                 this.setState({emailList: emailList});
             });
-
     }
 
     render() {
@@ -101,14 +107,11 @@ class ListMail extends React.Component {
         };
 
         return (
-
-
             <div style={{divStyle}} className="email-list">
                 <Card>
                     <AppBar position="static" >
                         <Toolbar variant="dense">
                             <Typography variant="title" color="inherit">
-                            { /* TODO: Do we want to try to add the name of the project we are looking at? */ }
                             Project Emails
                             </Typography>
                         </Toolbar>
@@ -150,7 +153,7 @@ class ListMail extends React.Component {
                     </Grid>
                 </Card>
             </div>
-        )
+        )    
     }
 }
-export default ListMail;
+export default withRouter(ListMail);

@@ -144,23 +144,32 @@ td:hover {
 }
 
 .email-date-sent-column {
-	width: 20%;
+	width: 15%;
 	padding-left: 10px
 }
 
 .email-subject-column {
-	width: 50%;
+	width: 45%;
 }
 
 .email-sender-column {
-	width: 25%;
+	width: 20%;
 }
 
 .email-recipient-column {
-	width: 25%;
+	width: 20%;
 }
 
 .email-list-item {
   text-decoration: none;
   color: inherit;
+}
+
+.survey-date-submitted-column {
+	width: 25%;
+	padding-left: 10px
+}
+
+.survey-student-column {
+	width: 75%;
 }

@@ -31,14 +31,7 @@ class ClientSurvey extends React.Component {
                         return (
                             <div key={questionKey}>
                                 <label className="display-label" htmlFor={questionKey}>{questionText}</label>
-                                <Input 
-                                    className="text-input" 
-                                    name={q.question_number}
-                                    id={questionKey}
-                                    title={questionText}
-                                    value={q.question_response} 
-                                    readOnly
-                                />
+                                <div><p>{q.question_response}</p></div>
                             </div>
                         );
                     });
@@ -58,11 +51,11 @@ class ClientSurvey extends React.Component {
 
         return (
             <div>
+                {this.state.questionList}
                 <Button variant="outlined" style={style} color="primary" onClick={this.handleGoBack.bind(this)}>
                     <i className="material-icons mdc-button__icon" aria-hidden="true">arrow_back</i>
                     Go back
                 </Button>
-                {this.state.questionList}
             </div>
         )
     }
