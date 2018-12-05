@@ -10,7 +10,7 @@ var projectSchema = new Schema({
 });
 
 /* Use the schema to instantiate a Mongoose model */
-var Project = mongoose.model('Project', projectSchema);
+var Project = mongoose.model('Projects', projectSchema);
 
 /* Export the model to make it avaiable to other parts of the Node application */
 module.exports = Project;

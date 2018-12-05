@@ -51,11 +51,11 @@ class ClientSurvey extends React.Component {
 
         return (
             <div>
+                {this.state.questionList}
                 <Button variant="outlined" style={style} color="primary" onClick={this.handleGoBack.bind(this)}>
                     <i className="material-icons mdc-button__icon" aria-hidden="true">arrow_back</i>
                     Go back
                 </Button>
-                {this.state.questionList}
             </div>
         )
     }

@@ -31,6 +31,7 @@ console.log('Displaying all teams');
                count: docs.length,
                teams: docs.map(doc => {
                     return {
+		
                          teamName: doc.teamName,
                          members: doc.members,
                          projects: doc.projects,
@@ -47,7 +48,8 @@ console.log('Displaying all teams');
                          request: {
                               type: 'GET',
                               url: 'http://localhost/3000/teams/' + doc._id
-                         }
+                         },
+			 _id:doc._id
                     }
                })
           };
