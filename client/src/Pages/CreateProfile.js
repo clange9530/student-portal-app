@@ -6,28 +6,31 @@ import { Input } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 
 class CreateProfile extends Component{
-    state = {
-        UserID: '',
-        Password: '',
-        First: '',
-        Last: '',
-        Address: '',
-        City:'',
-        State:'',
-        Zipcode:'',
-        Phone:'',
-        Email:'',
-        Github:'',
-        Bio:'',
-        Team: '',
-        Skills: [{name: ''}],
-        Options: 'POST'
-    }
-
-    componentDidMount () {
-        const { data } = this.props.location.state;
-        if (data !== null){
-            this.setState({
+    constructor(props){
+        super(props);
+        const inherit = this.props.inherit;
+        if (inherit === 'no'){
+            this.state = {
+                UserID: '',
+                Password: '',
+                First: '',
+                Last: '',
+                Address: '',
+                City:'',
+                State:'',
+                Zipcode:'',
+                Phone:'',
+                Email:'',
+                Github:'',
+                Bio:'',
+                Team: '',
+                Skills: [{name: ''}],
+                Options: 'POST',
+                Target: 'api/users'
+            }
+        } else if(inherit === 'yes') {
+            const data = this.props.location.state.data;
+            this.state = {
                 UserID: data.UserID,
                 Password: data.Password,
                 First: data.First,
@@ -41,11 +44,13 @@ class CreateProfile extends Component{
                 Github: data.Github,
                 Bio: data.Bio,
                 Team: data.Team,
-                Skills: data.Skills
-            });
+                Skills: data.Skills,
+                Options: 'PUT',
+                Target: 'api/users/' + data.UserID
+            }
         }
     }
-
+    
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
@@ -75,8 +80,8 @@ class CreateProfile extends Component{
     handleSubmit = (e) => {
         e.preventDefault();
         var User = this.state;
-        fetch('/api/users/', {
-            method: 'POST',
+        fetch(this.state.Target, {
+            method: this.state.Options,
             body: JSON.stringify(User),
             headers: {"content-type": "application/json"}
         })
@@ -97,8 +102,7 @@ class CreateProfile extends Component{
             Github:'',
             Bio:'',
             Skills: [{name: ''}],
-            Team: '',
-            Options: 'POST'
+            Team: ''
         });
     }
 

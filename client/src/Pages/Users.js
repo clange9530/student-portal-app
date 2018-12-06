@@ -14,8 +14,10 @@ import TableRow from '@material-ui/core/TableRow';
 
 
 class Users extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        var { match: { params } } = this.props;
+        this.userID = params.userID;
         this.state = {
             UserID: '',
             Skills: [],
@@ -35,8 +37,7 @@ class Users extends Component {
     }
        
     componentDidMount(){
-        const id = this.props.location.state.userid;
-        fetch('/api/users/' + id)
+        fetch('/api/users/' + this.userID)
         .then(response => response.json())
         .then(UserData => {
             var User = UserData[0];
@@ -110,7 +111,7 @@ class Users extends Component {
                                 variant="contained" 
                                 size="medium" 
                                 component={Link} 
-                                to={{pathname: '/CreateProfile', state: {data: this.state}}}
+                                to={{pathname: '/editProfile', state: {data: this.state}}}
                             >
                                 Edit Profile
                             </Button>
