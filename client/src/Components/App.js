@@ -1,3 +1,6 @@
+//© 2018 kaboom18
+//All rights reserved.
+
 import React from "react";
 import Header from './Header';
 import { BrowserRouter as Router, Route } from "react-router-dom";
