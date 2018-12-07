@@ -78,7 +78,7 @@ back() {
 	</div>
 <div>
 {this.state.logged}
-<Button variant="outlined" color="secondary" onClick={this.back}> previos</Button>
+<Button variant="outlined" color="secondary" onClick={this.back}> previous page</Button>
 </div>
 </div>
 
