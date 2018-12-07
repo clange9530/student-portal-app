@@ -11,7 +11,8 @@ class Login extends React.Component {
 	password:'',
 	name:'',
 	logged:''}
-
+		
+  this.back = this.back.bind(this);
   this.handleChangen = this.handleChangen.bind(this);
   this.handleResponse = this.handleResponse.bind(this);
   this.handleChangep = this.handleChangep.bind(this);
@@ -46,6 +47,10 @@ this.handleResponse(res.res,res.id,res.teamid,true);
     event.preventDefault();
 
   }
+	
+back() {
+        this.props.props.history.goBack()
+    }
 
   render() {
 	var getid=this.props.idget
@@ -73,6 +78,7 @@ this.handleResponse(res.res,res.id,res.teamid,true);
 	</div>
 <div>
 {this.state.logged}
+<Button variant="outlined" color="secondary" onClick={this.back}> previos</Button>
 </div>
 </div>
 
