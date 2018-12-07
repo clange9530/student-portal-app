@@ -51,10 +51,11 @@ module.exports.create = function(req, res) {
       Github: req.body.Github,
       Team: req.body.Team,
       Bio: req.body.Bio,
-      Skills: req.body.Skills
+      Skills: req.body.Skills,
+      Projects: req.body.Projects
     }
     console.log(user);
-    User.findOne({UserID: user.UserID}, user, function(err, data) {
+    User.findOneAndUpdate({UserID: user.UserID}, user, function(err) {
       if(err) {
         console.log(err);
         res.status(404).send(err.body);
