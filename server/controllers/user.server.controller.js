@@ -54,11 +54,12 @@ module.exports.create = function(req, res) {
       Bio: req.Bio,
       Skills: req.Skills
     }
-    User.findOneAndUpdate({UserID: user.UserID}, user, function(err) {
+    User.findOneAndUpdate({UserID: user.UserID}, user, function(err, data) {
       if(err) {
         console.log(err);
         res.status(404).send(err.body);
       } else {
+        res.json(data);
         res.send('User updated');
       }
     });
