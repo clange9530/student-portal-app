@@ -43,8 +43,6 @@ class ListMail extends React.Component {
         fetch("/api/email/" + this.projectId) 
             .then(response => response.json())
             .then(emails => {
-                console.log(emails);
-
                 var emailList = emails.map(em => 
                 {
                     var iconName = "";
@@ -66,8 +64,6 @@ class ListMail extends React.Component {
                         dateSent = (new Date(em.date_sent)).toDateString();
                     else
                         dateSent = "";
-
-                    console.log(em.date_sent);
 
                     return (
                         <tr key={em._id} onClick={() => this.navigate("/sendmail/" + this.projectId + "/" + em._id)}>

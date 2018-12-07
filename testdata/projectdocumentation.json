@@ -1,0 +1,29 @@
+{
+    "overwrite": "1",
+    "entries": [
+        {
+            "project_id": "566372f4d11de3498e2941c9",
+            "date_uploaded": "2018-01-12T20:12:23.199Z",
+            "filename": "ProjectRequirements.docx",
+            "s3path": "s3a://student-portal-app/566372f4d11de3498e2941c9/ProjectRequirements.docx"
+        },
+        {
+            "project_id": "566372f4d11de3498e2941c9",
+            "date_uploaded": "2018-01-16T20:12:23.199Z",
+            "filename": "Wireframes.png",
+            "s3path": "s3a://student-portal-app/566372f4d11de3498e2941c9/Wireframes.png"
+        },
+        {
+            "project_id": "566372f4d11de3498e2941c9",
+            "date_uploaded": "2018-01-19T20:12:23.199Z",
+            "filename": "Demo Slides.pptx",
+            "s3path": "s3a://student-portal-app/566372f4d11de3498e2941c9/Demo%20Slides.pptx"
+        },
+        {
+            "project_id": "566372f4d11de3498e2941c9",
+            "date_uploaded": "2018-01-22T20:12:23.199Z",
+            "filename": "Deployment Instructions.docx",
+            "s3path": "s3a://student-portal-app/566372f4d11de3498e2941c9/Deployment%20Instructions.docx"
+        }
+    ]
+}

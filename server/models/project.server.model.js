@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
 /* Create the schema */
 var projectSchema = new Schema({
     name: String,
-    client_name: String
+    client_name: String,
+    description: String
 });
 
 /* Use the schema to instantiate a Mongoose model */
