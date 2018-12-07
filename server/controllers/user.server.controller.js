@@ -37,29 +37,28 @@ module.exports.create = function(req, res) {
   
   /* Update a user */
   module.exports.update = function(req, res) {
-    var user = req.user;
-    user = {
-      UserID: req.UserID,
-      Password: req.Password,
-      First: req.First,
-      Last: req.Last,
-      Address: req.Address,
-      City: req.City,
-      State: req.State,
-      Zipcode: req.Zipcode,
-      Phone: req.Phone,
-      Email: req.Email,
-      Github: req.Github,
-      Team: req.Team,
-      Bio: req.Bio,
-      Skills: req.Skills
+    var user = {
+      UserID: req.body.UserID,
+      Password: req.body.Password,
+      First: req.body.First,
+      Last: req.body.Last,
+      Address: req.body.Address,
+      City: req.body.City,
+      State: req.body.State,
+      Zipcode: req.body.Zipcode,
+      Phone: req.body.Phone,
+      Email: req.body.Email,
+      Github: req.body.Github,
+      Team: req.body.Team,
+      Bio: req.body.Bio,
+      Skills: req.body.Skills
     }
-    User.findOneAndUpdate({UserID: user.UserID}, user, function(err, data) {
+    console.log(user);
+    User.findOne({UserID: user.UserID}, user, function(err, data) {
       if(err) {
         console.log(err);
         res.status(404).send(err.body);
       } else {
-        res.json(data);
         res.send('User updated');
       }
     });
