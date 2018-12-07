@@ -21,7 +21,7 @@ code {
 }
 
 .row {
-  margin: 1rem;
+	margin: 1rem
 }
 
 .navBar {
@@ -38,6 +38,7 @@ code {
   width: 33.33%;
 }
 
+
 .row:after {
   content: "";
   display: table;
@@ -47,14 +48,12 @@ code {
 
 /*User profile styles.*/
 #lists {
-  margin: 10px;
-  border: 3px solid black;
-  padding: 5px;
   list-style-position: inside;
-  background: lightgray;
-  margin-bottom: 50px;
+	background: lightgray;
 }
-
+#lists:hover{
+	background: white
+}
 
 * {
 	box-sizing: border-box;

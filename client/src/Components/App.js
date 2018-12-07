@@ -39,8 +39,9 @@ class App extends React.Component {
 	        <Header/>
 					<Route exact path='/' component={Home}/>
 					<Route path='/teams' component={Teams}/>
-					<Route path='/users' component={Users}/>
-					<Route path='/createProfile' component={CreateProfile}/>
+					<Route path='/users/:userID' component={Users}/>
+					<Route path='/createProfile' render={(props) => (<CreateProfile {...props} inherit='no'/>)} />
+					<Route path='/editProfile' render={(props) => (<CreateProfile {...props} inherit='yes'/>)} />
 					<Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
 					<Route path="/listmail/:projectId" component={ListMail} />
 					<Route path="/studentsurvey/:projectId/:surveyId?" component={StudentSurvey} />
