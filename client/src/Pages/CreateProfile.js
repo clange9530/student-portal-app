@@ -25,8 +25,11 @@ class CreateProfile extends Component{
                 Bio:'',
                 Team: '',
                 Skills: [{name: ''}],
+                Projects: [{name: ''}],
+                ProfilePicURL: '',
                 Options: 'POST',
-                Target: 'api/users'
+                Target: 'api/users',
+                FilesToUpload: []
             }
         } else if(inherit === 'yes') {
             const data = this.props.location.state.data;
@@ -45,8 +48,11 @@ class CreateProfile extends Component{
                 Bio: data.Bio,
                 Team: data.Team,
                 Skills: data.Skills,
+                Projects: data.Projects,
+                ProfilePicURL: data.ProfilePicURL,
                 Options: 'PUT',
-                Target: 'api/users/' + data.UserID
+                Target: 'api/users/' + data.UserID,
+                FilesToUpload: []
             }
         }
     }
@@ -63,6 +69,21 @@ class CreateProfile extends Component{
         this.setState({Skills: newSkills})
     }
 
+    handleProjectChange = (index) => (e) => {
+        const newProjects = this.state.Projects.map((project, projectIndex) => {
+            if (index !== projectIndex) return project;
+            return { ...project, name: e.target.value};
+        });
+        this.setState({Projects: newProjects})
+    }
+
+    addProject = (e) => {
+        e.preventDefault();
+        this.setState({
+            Projects: this.state.Projects.concat([{name: ''}])
+        })
+    }
+
     addSkill = (e) => {
         e.preventDefault();
         this.setState({
@@ -70,10 +91,31 @@ class CreateProfile extends Component{
         })
     }
 
+    deleteProject = (index) => (e) => {
+        e.preventDefault();
+        this.setState({
+            Projects: this.state.Projects.filter((project, projectIndex) => index !== projectIndex)
+        })
+    }
+
+
     deleteSkill = (index) => (e) => {
         e.preventDefault();
         this.setState({
             Skills: this.state.Skills.filter((skill, skillIndex) => index !== skillIndex)
+        })
+    }
+
+    onDrop = (fileInput) => {
+        var file = document.getElementById("fileUpload");
+        var name = file.files[0].name;
+        console.log(name);
+        fetch('api/upload',{
+            method: 'POST',
+            body: fileInput
+        })
+        this.setState({
+            ProfilePicURL: "http://s3.amazonaws.com/cen-3031-student-portal-app/" + name
         })
     }
 
@@ -88,6 +130,7 @@ class CreateProfile extends Component{
         .then(res => res.json())
         .then(data => console.log(data))
         .catch(err => console.log(err))
+        
         this.setState({
             UserID: '',
             Password: '',
@@ -254,13 +297,28 @@ class CreateProfile extends Component{
                                     <Input 
                                         type="text"
                                         placeholder="Enter a skill"
-                                        value={skill.name}
+                                        value={skill}
                                         onChange={this.handleSkillChange(index)}
                                     />
                                     <Button onClick={this.deleteSkill(index)}>Remove</Button>
                                 </div>
                             ))}
                         <Button onClick={this.addSkill}>Add</Button>
+                    </Grid>
+                    <Grid item md={12}>
+                        <label className="display-label">Projects</label>
+                        {this.state.Projects.map((project, index) => (
+                                <div>
+                                    <Input 
+                                        type="text"
+                                        placeholder="Add a project that you helped with"
+                                        value={project}
+                                        onChange={this.handleProjectChange(index)}
+                                    />
+                                    <Button onClick={this.deleteProject(index)}>Remove</Button>
+                                </div>
+                            ))}
+                        <Button onClick={this.addProject}>Add</Button>
                     </Grid>
                     <Grid item md={12}>
                         <label className="display-label">Bio</label>
@@ -274,6 +332,13 @@ class CreateProfile extends Component{
                             onChange={this.handleChange}
                             placeholder="Say something about yourself"
                             fullWidth={false}
+                        />
+                    </Grid>
+                    <Grid item md={12}>
+                        <input 
+                            type="file"
+                            id="fileUpload"
+                            onChange= {this.onDrop}
                         />
                     </Grid>
                     <Grid item md={12}>

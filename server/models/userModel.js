@@ -22,7 +22,8 @@ var UserSchema = new Schema({
   Team:String,
   Bio:String,
   Skills:Array,
-  Projects: Array
+  Projects: Array,
+  ProfilePicURL: String
 },{collection: 'users'});
 
 
