@@ -38,9 +38,15 @@ exports.list_members = function(req, res) {
             res.status(404).send(err);
         	}
 	else{
-			console.log(projectId);
-			console.log(team);
+			try{
 			var list=team["members"]
+			}
+			catch
+			{
+			var list=[]
+	    		list.push(project["creatorID"]);
+	    		res.status(200).send({list:list})
+			}
 			list.push(project["creatorID"]);
 			res.status(200).send({list:list})
 		}
