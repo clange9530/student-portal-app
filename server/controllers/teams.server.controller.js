@@ -2,7 +2,7 @@ var Team = require('../models/teamModel.js'),
  mongoose = require('mongoose');
 
 
-exports.create_new_team = function(req, res){
+module.exports.create_new_team = function(req, res){
      //Create a new team
      const team = new Team({
           _id: new mongoose.Types.ObjectId(),
@@ -20,8 +20,22 @@ exports.create_new_team = function(req, res){
      })
 };
 
+//Retrieve specific team by team_id
+module.exports.team_by_id = function(req, res, next, TeamID){
+     Team.find({_id: TeamID}, function(err, team) {
+          if (err) {
+               console.log(err);
+               res.status(400).send(err);
+          } else {
+               req.team = team;
+               next();
+          }
+     });
+
+};
+
 /* Retreive all the teams, sorted alphabetically by team name */
-exports.all_teams = (req, res, next) => {
+module.exports.all_teams = function(req, res, next) {
   //This uses the mongo find command to return all teams
 console.log('Displaying all teams');
   Team.find({}, null, {sort: {teamname: 1}})
@@ -31,7 +45,7 @@ console.log('Displaying all teams');
                count: docs.length,
                teams: docs.map(doc => {
                     return {
-		
+
                          teamName: doc.teamName,
                          members: doc.members,
                          projects: doc.projects,
@@ -72,7 +86,7 @@ console.log('Displaying all teams');
 };
 
 //This will find a team based on its unique id
-exports.find_team = (req, res, next) => {
+module.exports.find_team = function(req, res, next) {
      const id = req.params.teamName;
      Team.findById(id)
           .exec()
@@ -90,7 +104,7 @@ exports.find_team = (req, res, next) => {
           });
 };
 
-exports.update_team = (req, res, next) => {
+module.exports.update_team = function(req, res, next) {
      //Store teamName as id for search
      const id = req.params.teamName;
      /*The following code will search for any changes to
@@ -119,7 +133,7 @@ exports.update_team = (req, res, next) => {
      });
 };
 
-exports.delete_team = (req, res, next) => {
+module.exports.delete_team = function(req, res, next) {
      //Store teamName property as id for search
      const id = req.params.teamName;
      /*The following will delete a team based on the

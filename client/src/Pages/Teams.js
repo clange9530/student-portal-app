@@ -80,6 +80,18 @@ render() {
                                })
                           }
                      </ul>
+                <h4>Projects</h4>
+                    <ul id="lists">
+                         {
+                              this.state.projects.map((val, index) => {
+                                   return(
+                                        <li key={index}>
+                                             {val}
+                                        </li>
+                                   )
+                              })
+                         }
+                    </ul>
             </div>
             <div className="column">
                 <th>Detailed Info</th>
