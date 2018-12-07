@@ -7,7 +7,9 @@ class CreateProject extends React.Component {
         super(props);
         this.state = {name: '',
         description:'',
-	res:''
+	id:'',
+	res:'',
+	proj:'',
         };
         
     
@@ -35,7 +37,7 @@ handleInputChange(event) {
 fetch('/projects/create/'+this.state.name+'/'+this.state.description+'/'+this.props.user["_id"]).then(function(response) {
 return response.json()}).then(function(response){
 	if(response.res==='project created')
-		{this.setState({res:response.res});}
+		{this.setState({res:response.res});this.setState({id:response.id});this.setState({id:"/project/"+response.id["_id"]});this.setState({proj:"link"})}
 	else{this.setState({res:"Error try changing the project title. If the error persists contact an administrator."})}
 	}.bind(this))
 event.preventDefault();
@@ -54,8 +56,10 @@ event.preventDefault();
 	if (this.state.res=='project created')
 	{
     return (
-	
+	<div>
 	<h1>Congratulations you created a project.</h1>
+	<li><Link to={this.state.id }>{this.state.proj}</Link></li>
+	</div>
 	);
 	}
 	else

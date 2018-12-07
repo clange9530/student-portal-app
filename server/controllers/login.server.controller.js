@@ -17,19 +17,19 @@ var mongoose = require('mongoose'),
 
 /* login */
 exports.login = function(req, res) {
-if ("userid" ==='userid'){console.log('comp')}
-console.log("login");
-console.log(req.params);
+console.log("login attempt");
+console.log(req.params.name);
 Users.find({ UserID: req.params.name },function (err, entry) {
     if (err) {console.error(err); res.status(404).send(err);}
     else {
-	console.log(req.params.name);
-	console.log(entry[0].Password);
-	if (entry[0].Password === req.params.pswrd)
-	{
-	console.log(req.params.pswrd);res.status(200).send({res:'logged in ',id:entry[0]._id,teamid:''});}
-	else
-	{console.log(req.params.pswrd);res.status(200).send({res:'log in failed',id:'',teamid:''});}
+	try{
+		if (entry[0].Password === req.params.pswrd)
+		{
+		res.status(200).send({res:'logged in ',id:entry[0]._id,teamid:''});}
+		else
+		{res.status(200).send({res:'log in failed',id:'',teamid:''});}
+	}
+	catch{res.status(200).send({res:'log in failed',id:'',teamid:''});}
     }
   });
 

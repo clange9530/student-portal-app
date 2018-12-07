@@ -1,3 +1,6 @@
+//© 2018 kaboom18
+//All rights reserved.
+
 import React from "react";
 import Header from './Header';
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -13,6 +16,7 @@ import Project from './Project';
 import TeamSkills from './TeamSkills';
 import Login from './login';
 import CreateProject from './CreateProject';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -35,13 +39,20 @@ class App extends React.Component {
 	        <Header/>
 					<Route exact path='/' component={Home}/>
 					<Route path='/teams' component={Teams}/>
-					<Route path='/users' component={Users}/>
-					<Route path='/createProfile' component={CreateProfile}/>
+					<Route path='/users/:userID' component={Users}/>
+					<Route path='/createProfile' render={(props) => (<CreateProfile {...props} inherit='no'/>)} />
+					<Route path='/editProfile' render={(props) => (<CreateProfile {...props} inherit='yes'/>)} />
 					<Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
 					<Route path="/listmail/:projectId" component={ListMail} />
 					<Route path="/studentsurvey/:projectId/:surveyId?" component={StudentSurvey} />
-					<Route path="/clientsurvey/:projectId" component={ClientSurvey} />
-					<Route path="/project/:projectId" component={Project} />      
+					<Route path="/clientsurvey/:projectId" component={ClientSurvey}/>
+					<Route path="/project/:projectId" 
+						render={props => 
+						<Project
+							user={this.state.user}
+							params={props.match}
+						/>}
+					/>    
 					<Route path='/teamskills' component={TeamSkills}/>
 					<Route
 						path="/login"
@@ -53,12 +64,13 @@ class App extends React.Component {
 					<Route path="/create_project"
 						render={props => 
 						<CreateProject
-							user={this.state.user}
+							user={this.state.user}	
 						/>
 						}
 					/>
       	</div>
 			</Router>
+
 
     );
   }

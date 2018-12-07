@@ -26,12 +26,14 @@ function BasicExample() {
         </ul>
 
         <hr />
-
-        <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
-        <Route path="/topics" component={Topics} />
-        <Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
-        <Route path="/listmail/:projectId" component={ListMail} />
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/topics" component={Topics} />
+          <Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
+          <Route path="/listmail/:projectId" component={ListMail} />
+        </div>
+        
       </div>
     </Router>
   );
