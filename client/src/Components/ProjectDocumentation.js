@@ -41,15 +41,16 @@ class ProjectDocumentation extends React.Component {
 
     handleDelete(documentId) {
         console.log("Deleting " + documentId);
-
-        fetch('/api/projectdocumentation/' + this.projectId + '/' + documentId, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }        
-        })
-        .then(() => {this.getFileList()});
+        if (window.confirm("Are you sure you want to delete the selected document?")) {
+            fetch('/api/projectdocumentation/' + this.projectId + '/' + documentId, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }        
+            })
+            .then(() => {this.getFileList()});   
+        }  
     }
 
     getFileList() {
