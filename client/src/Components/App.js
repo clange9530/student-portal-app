@@ -38,7 +38,7 @@ class App extends React.Component {
 	      <div>
 	        <Header/>
 					<Route exact path='/' component={Home}/>
-					<Route path='/teams' component={Teams}/>
+					<Route path='/teams/:teamName' component={Teams}/>
 					<Route path='/users/:userID' component={Users}/>
 					<Route path='/createProfile' render={(props) => (<CreateProfile {...props} inherit='no'/>)} />
 					<Route path='/editProfile' render={(props) => (<CreateProfile {...props} inherit='yes'/>)} />

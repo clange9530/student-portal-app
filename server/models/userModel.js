@@ -21,7 +21,9 @@ var UserSchema = new Schema({
   Github:String,
   Team:String,
   Bio:String,
-  Skills:Array
+  Skills:Array,
+  Projects: Array,
+  ProfilePicURL: String
 },{collection: 'users'});
 
 

@@ -11,6 +11,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 
 
 class Users extends Component {
@@ -32,7 +34,8 @@ class Users extends Component {
             Email: '',
             Github: '',
             Team: '',
-            Bio: ''
+            Bio: '',
+            ProfilePicURL: ''
         };
     }
        
@@ -43,6 +46,7 @@ class Users extends Component {
             var User = UserData[0];
             this.setState({ 
             Skills: User.Skills,
+            Projects: User.Projects,
             UserID: User.UserID,
             First: User.First,
             Last: User.Last,
@@ -54,7 +58,8 @@ class Users extends Component {
             Email: User.Email,
             Github: User.Github,
             Team: User.Team,
-            Bio: User.Bio
+            Bio: User.Bio,
+            ProfilePicURL: User.ProfilePicURL
             })
         })
         .catch(err => console.log(err));
@@ -64,85 +69,94 @@ class Users extends Component {
 
     render() {
         return(
-            <div className="row" >
-                <div className="column">
-                    <Grid container direction="column">
-                        <Grid item md>
-                            <Typography>Profile pic goes here</Typography>
-                        </Grid>
-                        <Grid item md>
-                            <Button variant="contained" size="small">Add Profile Pic</Button>
-                        </Grid>
-                        <Grid item md>
-                            <label className="display-label">Bio</label>
-                            <p>{this.state.Bio}</p>
-                        </Grid>
-                    </Grid>
+            <div>
+                <div className="row">
+                    <AppBar position="static">
+                        <Toolbar variant="dense">
+                            <Typography variant="title" color="inherit">
+                            {this.state.UserID}
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
                 </div>
-                <div className="column">
-                    <Grid container direction="column">
-                        <Grid item md>
-                            <label className="display-label">{this.state.UserID}'s Personal Info</label>
-                            <Table>
-                                <TableBody>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>{this.state.First} {this.state.Last}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell>{this.state.Email}</TableCell>
-                                            <TableCell>{this.state.Github}</TableCell>
-                                            <TableCell>{this.state.Phone}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell>{this.state.Address}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell>{this.state.City}</TableCell>
-                                            <TableCell>{this.state.State}</TableCell>
-                                            <TableCell>{this.state.Zipcode}</TableCell>
-                                        </TableRow>
-                                    </TableHead>  
-                                </TableBody>   
-                            </Table> 
+                <div className="row">
+                    <div className="column">
+                        <Grid container direction="column">
+                            <Grid item md>
+                                <img src={this.state.ProfilePicURL} alt="profile pic"></img>
+                                <Typography>Profile pic goes here</Typography>
+                            </Grid>
+                            <Grid item md>
+                                <label className="display-label">Bio</label>
+                                <p>{this.state.Bio}</p>
+                            </Grid>
                         </Grid>
-                        <Grid item sm>
-                            <Button 
-                                variant="contained" 
-                                size="medium" 
-                                component={Link} 
-                                to={{pathname: '/editProfile', state: {data: this.state}}}
-                            >
-                                Edit Profile
-                            </Button>
+                    </div>
+                    <div className="column">
+                        <Grid container direction="column">
+                            <Grid item md>
+                                <label className="display-label">{this.state.UserID}'s Personal Info</label>
+                                <Table>
+                                    <TableBody>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>{this.state.First} {this.state.Last}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell>{this.state.Email}</TableCell>
+                                                <TableCell>{this.state.Github}</TableCell>
+                                                <TableCell>{this.state.Phone}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell>{this.state.Address}</TableCell>
+                                            </TableRow>
+                                            <TableRow>
+                                                <TableCell>{this.state.City}</TableCell>
+                                                <TableCell>{this.state.State}</TableCell>
+                                                <TableCell>{this.state.Zipcode}</TableCell>
+                                            </TableRow>
+                                        </TableHead>  
+                                    </TableBody>   
+                                </Table> 
+                            </Grid>
+                            <Grid item sm>
+                                <Button 
+                                    variant="contained" 
+                                    size="medium" 
+                                    component={Link} 
+                                    to={{pathname: '/editProfile', state: {data: this.state}}}
+                                >
+                                    Edit Profile
+                                </Button>
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </div>
+                    <div className="column">
+                        <Grid container direction="column">
+                            <Grid item md>
+                                <List>
+                                    <label className="display-label">Technical Skills</label>
+                                    {this.state.Skills.map((item,i) => 
+                                        <ListItem id="lists" key={i}>
+                                            <ListItemText>{item}</ListItemText>    
+                                        </ListItem>
+                                    )} 
+                                </List>
+                            </Grid>
+                            <Grid item md>
+                                <List>
+                                    <label className="display-label">Past Projects</label>
+                                    {this.state.Projects.map((item,i) => 
+                                        <ListItem id="lists" key={i}>
+                                            <ListItemText>{item}</ListItemText>    
+                                        </ListItem>
+                                    )} 
+                                </List>
+                            </Grid>
+                        </Grid>
+                    </div>
                 </div>
-                <div className="column">
-                    <Grid container direction="column">
-                        <Grid item md>
-                            <List>
-                                <label className="display-label">Technical Skills</label>
-                                {this.state.Skills.map((item,i) => 
-                                    <ListItem id="lists" key={i}>
-                                        <ListItemText>{item}</ListItemText>    
-                                    </ListItem>
-                                )} 
-                            </List>
-                        </Grid>
-                        <Grid item md>
-                            <List>
-                                <label className="display-label">Past Projects</label>
-                                {this.state.Projects.map((item,i) => 
-                                    <ListItem id="lists" key={i}>
-                                        <ListItemText>{item.name}</ListItemText>    
-                                    </ListItem>
-                                )} 
-                            </List>
-                        </Grid>
-
-                    </Grid>
-                </div>
+                
             </div> 
         )
     }

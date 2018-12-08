@@ -1,8 +1,8 @@
-var Team = require('../models/teamModel.js'),
- mongoose = require('mongoose');
+var  Team = require('../models/teamModel.js'),
+     mongoose = require('mongoose');
 
 
-exports.create_new_team = function(req, res){
+module.exports.create_new_team = function(req, res){
      //Create a new team
      const team = new Team({
           _id: new mongoose.Types.ObjectId(),
@@ -21,7 +21,7 @@ exports.create_new_team = function(req, res){
 };
 
 /* Retreive all the teams, sorted alphabetically by team name */
-exports.all_teams = (req, res, next) => {
+module.exports.all_teams = (req, res, next) => {
   //This uses the mongo find command to return all teams
 console.log('Displaying all teams');
   Team.find({}, null, {sort: {teamname: 1}})
@@ -73,8 +73,7 @@ console.log('Displaying all teams');
 
 //This will find a team based on its unique id
 exports.find_team = (req, res, next) => {
-     const id = req.params.teamName;
-     Team.findById(id)
+     Team.findOne({"teamName": req.params.teamName})
           .exec()
           .then(doc => {
                console.log("From database", doc);
@@ -136,3 +135,15 @@ exports.delete_team = (req, res, next) => {
                })
           })
 };
+
+module.exports.teamByName = function(req, res, next, _id) {
+     Team.find({teamName: _id}, function(err, team) {
+         if(err) {
+         console.log(err);
+         res.status(400).send(err);
+         } else {
+         req.team = team;
+         next();
+         }
+     });
+ };
