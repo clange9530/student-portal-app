@@ -116,7 +116,7 @@ class ListMail extends React.Component {
                         <Grid item md={12}>
                             <Link to={"/sendmail/" + this.projectId}>
                                 <Button variant="contained" style={style} color="primary" >
-                                    <i className="material-icons mdc-button__icon" aria-hidden="true">mail_outline</i>
+                                    <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">mail_outline</i>
                                     New message
                                     </Button>
                             </Link>

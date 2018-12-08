@@ -79,13 +79,13 @@ class ListSurveys extends React.Component {
                         <Grid item md={12}>
                             <Link to={"/studentsurvey/" + this.projectId}>
                                 <Button variant="contained" style={style} color="primary" >
-                                    <i className="material-icons mdc-button__icon" aria-hidden="true">note_add</i>
+                                    <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">note_add</i>
                                     Submit student survey
                                 </Button>
                             </Link>
                             <Link to={"/clientsurvey/" + this.projectId}>
                                 <Button variant="contained" style={style} color="primary" >
-                                    <i className="material-icons mdc-button__icon" aria-hidden="true">open_in_browser</i>
+                                    <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">open_in_browser</i>
                                     View client survey
                                 </Button>
                             </Link>

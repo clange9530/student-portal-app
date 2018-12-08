@@ -126,7 +126,7 @@ class ProjectDocumentation extends React.Component {
                                 style={style} 
                                 color="primary" 
                                 onClick={() => this.upload.click()} >
-                                <i className="material-icons mdc-button__icon" aria-hidden="true">cloud_upload</i>
+                                <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">cloud_upload</i>
                                 Upload document
                             </Button>
                         </Grid>                    

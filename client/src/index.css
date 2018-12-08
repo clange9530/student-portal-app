@@ -173,3 +173,7 @@ td:hover {
 .survey-student-column {
 	width: 75%;
 }
+
+.button-icon {
+	margin-right: 6px;
+}

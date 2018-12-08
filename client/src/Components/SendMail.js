@@ -158,7 +158,7 @@ class SendMail extends React.Component {
 
             newMailButton = 
                 <Button variant="contained" style={style} color="primary" onClick={this.sendMessage.bind(this)}>
-                    <i className="material-icons mdc-button__icon" aria-hidden="true">send</i>
+                    <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">send</i>
                     Send message
                 </Button>;
 
@@ -255,7 +255,7 @@ class SendMail extends React.Component {
                         <Grid item md={12}>
                             {newMailButton}
                             <Button variant="outlined" style={style} color="primary" onClick={this.handleGoBack.bind(this)}>
-                                <i className="material-icons mdc-button__icon" aria-hidden="true">{cancelButtonIcon}</i>
+                                <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">{cancelButtonIcon}</i>
                                 {cancelButtonText}
                             </Button>
                         </Grid>

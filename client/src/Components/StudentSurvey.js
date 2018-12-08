@@ -150,7 +150,7 @@ class StudentSurvey extends React.Component {
 
             submitSurveyButton = 
                 <Button variant="contained" style={style} color="primary" onClick={this.submitSurvey.bind(this)}>
-                    <i className="material-icons mdc-button__icon" aria-hidden="true">arrow_forward</i>
+                    <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">arrow_forward</i>
                     Submit Survey
                 </Button>;
 
@@ -165,7 +165,7 @@ class StudentSurvey extends React.Component {
                 {questionList}
                 {submitSurveyButton}
                 <Button variant="outlined" style={style} color="primary" onClick={this.handleGoBack.bind(this)}>
-                    <i className="material-icons mdc-button__icon" aria-hidden="true">{cancelButtonIcon}</i>
+                    <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">{cancelButtonIcon}</i>
                     {cancelButtonText}
                 </Button>
             </div>
