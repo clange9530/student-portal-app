@@ -1,10 +1,6 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 
 class ProjectDocumentation extends React.Component {
     constructor(props) {
@@ -95,61 +91,46 @@ class ProjectDocumentation extends React.Component {
 
     render() {
 
-        const style = {
-            margin: '8px 8px 4px 2px'
-        };
-
-        var divStyle = {
-            border: '2px solid #000000'
-        };
+        const buttonDivStyle = {
+            margin: '0px 0px 32px 0px'
+        }
 
         return (
-            <div style={{divStyle}} className="column1">
-                <Card>
-                    <AppBar position="static" >
-                        <Toolbar variant="dense">
-                            <Typography variant="title" color="inherit">
-                            Project Documentation
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
-                    <Grid container direction="column" spacing={16} className="email-grid">
-                        <Grid item md={12}>
-                            <input 
-                                id="fileSelector" 
-                                type="file" 
-                                ref={(ref) => this.upload = ref} 
-                                style={{ display: 'none' }} 
-                                onChange={ (e) => this.handleUpload(e.target.files) }
-                            />
-                            <Button 
-                                variant="contained" 
-                                style={style} 
-                                color="primary" 
-                                onClick={() => this.upload.click()} >
-                                <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">cloud_upload</i>
-                                Upload document
-                            </Button>
-                        </Grid>                    
-                    </Grid>
-                    <Grid container direction="column" spacing={16}>
-                        <div className="tableWrapper">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th className="survey-date-submitted-column">Date uploaded</th>
-                                        <th className="survey-student-column">Filename</th>
-                                        <th />
-                                    </tr>
-                                </thead>
+            <div className="column1">
+                <input 
+                    id="fileSelector" 
+                    type="file" 
+                    ref={(ref) => this.upload = ref} 
+                    style={{ display: 'none' }} 
+                    onChange={ (e) => this.handleUpload(e.target.files) }
+                />
+                
+                <div style={buttonDivStyle}>
+                    <Button 
+                        variant="contained" 
+                        color="primary" 
+                        onClick={() => this.upload.click()} >
+                        <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">cloud_upload</i>
+                        Upload document
+                    </Button>
+                </div>
+                <Grid container direction="column" spacing={16}>
+                    <div className="tableWrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th className="survey-date-submitted-column">Date uploaded</th>
+                                    <th className="survey-student-column">Filename</th>
+                                    <th />
+                                </tr>
+                            </thead>
 
-                                <tbody>
-                                    {this.state.fileList}
-                                </tbody>
-                            </table>
-                        </div>
-                    </Grid>
-                </Card>
+                            <tbody>
+                                {this.state.fileList}
+                            </tbody>
+                        </table>
+                    </div>
+                </Grid>
             </div>
         )
     }
