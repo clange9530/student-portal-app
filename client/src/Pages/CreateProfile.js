@@ -297,7 +297,7 @@ class CreateProfile extends Component{
                                     <Input 
                                         type="text"
                                         placeholder="Enter a skill"
-                                        value={skill}
+                                        value={skill.name}
                                         onChange={this.handleSkillChange(index)}
                                     />
                                     <Button onClick={this.deleteSkill(index)}>Remove</Button>
@@ -312,7 +312,7 @@ class CreateProfile extends Component{
                                     <Input 
                                         type="text"
                                         placeholder="Add a project that you helped with"
-                                        value={project}
+                                        value={project.name}
                                         onChange={this.handleProjectChange(index)}
                                     />
                                     <Button onClick={this.deleteProject(index)}>Remove</Button>

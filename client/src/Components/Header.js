@@ -1,21 +1,31 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 
-const Header = () => (
-  <header className="header">
-    <nav>
-      <ul>
-        <li className="navBar"><Link to='/'>Home</Link></li>
-        <li className="navBar"><Link to='/users'>Individual Profiles</Link></li>
-        <li className="navBar"><Link to='/teamskills'>Team skills</Link></li>
-        <li className="navBar"><Link to='/teams'>Teams</Link></li>
-        <li className="navBar"><Link to="/createProfile">Create New Profile</Link></li>
-        <li className="navBar"><Link to='/create_project'>Create Project</Link></li>
-        <li className="navBar"><Link to="/project/566372f4d11de3498e2941c9">View project</Link></li>    {/* TODO: Make project id dynamic */}
-        <li className="navBar"><Link to='/login'>Login</Link></li>
-      </ul>
-    </nav>
-  </header>
-)
+class Header extends Component{
+  
+  render(){
+    return(
+      <div>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton color="inherit" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit">
+              UF Team and Project Management
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </div>
+    )
+  }
+}
   
 export default Header;
