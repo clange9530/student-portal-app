@@ -138,7 +138,7 @@ class Users extends Component {
                                     <label className="display-label">Technical Skills</label>
                                     {this.state.Skills.map((item,i) => 
                                         <ListItem id="lists" key={i}>
-                                            <ListItemText>{item}</ListItemText>    
+                                            <ListItemText>{item.name}</ListItemText>    
                                         </ListItem>
                                     )} 
                                 </List>
@@ -148,7 +148,7 @@ class Users extends Component {
                                     <label className="display-label">Past Projects</label>
                                     {this.state.Projects.map((item,i) => 
                                         <ListItem id="lists" key={i}>
-                                            <ListItemText>{item}</ListItemText>    
+                                            <ListItemText>{item.name}</ListItemText>    
                                         </ListItem>
                                     )} 
                                 </List>

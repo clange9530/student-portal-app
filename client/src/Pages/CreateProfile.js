@@ -28,7 +28,7 @@ class CreateProfile extends Component{
                 Projects: [{name: ''}],
                 ProfilePicURL: '',
                 Options: 'POST',
-                Target: 'api/users',
+                Target: 'api/users/',
                 FilesToUpload: []
             }
         } else if(inherit === 'yes') {
@@ -145,6 +145,7 @@ class CreateProfile extends Component{
             Github:'',
             Bio:'',
             Skills: [{name: ''}],
+            Projects: [{name: ''}],
             Team: ''
         });
     }
