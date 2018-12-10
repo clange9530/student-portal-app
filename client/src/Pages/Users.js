@@ -68,8 +68,6 @@ class Users extends Component {
         .catch(err => console.log(err));
     }
 
-    
-
     render() {
         return(
             <div>
@@ -88,7 +86,6 @@ class Users extends Component {
                                 <Typography>Profile pic goes here</Typography>
                             </Grid>
                             <Grid item md>
-                                <label className="display-label">{this.state.UserID}'s Personal Info</label>
                                 <Table style={{'margin-top': '100', 'width': 'auto'}}>
                                     <TableBody>
                                         <TableHead color="inherit">

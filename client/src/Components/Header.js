@@ -54,6 +54,24 @@ class Header extends Component{
             >
               <Typography variant="h8" color="inherit">Team Skills</Typography>
             </Button>
+            <Button
+              style={style}
+              variant="contained" 
+              size="medium" 
+              component={Link}
+              color="grey"
+              to={'/'}   //Link to sendmail. 
+            >
+              <Typography variant="h8" color="inherit">Send Mail</Typography>
+            </Button>
+            
+
+
+
+
+
+
+
             <IconButton 
               aria-owns={open ? 'profile-appbar': undefined}
               aria-haspopup = "true"
@@ -76,6 +94,13 @@ class Header extends Component{
               open={open}
               onClose={this.handleClose}
             >
+              <MenuItem
+                onClick={this.handleClose}
+                component={Link}
+                to={{pathname: '/login'}}
+              >
+                Login
+              </MenuItem>
               <MenuItem 
                 onClick={this.handleClose}
                 component={Link} 
