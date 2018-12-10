@@ -16,8 +16,15 @@ var studentSurveyResponseSchema = new Schema({
     }]
 });
 
+/* Create a 'pre' function that populates the date_submitted property */
+studentSurveyResponseSchema.pre('save', function(next) {
+    var today = new Date();
+    this.date_submitted = today;
+    next();
+  });
+
 /* Use the schema to instantiate a Mongoose model */
 var StudentSurveyResponse = mongoose.model('StudentSurveyResponse', studentSurveyResponseSchema);
 
-/* Export the model to make it avaiable to other parts of the application */
+/* Export the model to make it available to other parts of the application */
 module.exports = StudentSurveyResponse;
