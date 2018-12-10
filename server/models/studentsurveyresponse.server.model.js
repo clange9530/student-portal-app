@@ -18,8 +18,11 @@ var studentSurveyResponseSchema = new Schema({
 
 /* Create a 'pre' function that populates the date_submitted property */
 studentSurveyResponseSchema.pre('save', function(next) {
-    var today = new Date();
-    this.date_submitted = today;
+    // Only populate if not already populated... 
+    // this should really only matter when we are creating test data
+    if (!this.date_submitted) {
+        this.date_submitted = new Date();
+    }
     next();
   });
 
