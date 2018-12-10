@@ -60,18 +60,20 @@ class Header extends Component{
               size="medium" 
               component={Link}
               color="grey"
-              to={'/'}   //Link to sendmail. 
+              to={'/project/566372f4d11de3498e2941c9'}    
             >
-              <Typography variant="h8" color="inherit">Send Mail</Typography>
+              <Typography variant="h8" color="inherit">View Project</Typography>
             </Button>
-            
-
-
-
-
-
-
-
+            <Button
+              style={style}
+              variant="contained" 
+              size="medium" 
+              component={Link}
+              color="grey"
+              to={'/create_project'}   
+            >
+              <Typography variant="h8" color="inherit">Create Project</Typography>
+            </Button>
             <IconButton 
               aria-owns={open ? 'profile-appbar': undefined}
               aria-haspopup = "true"
@@ -110,13 +112,6 @@ class Header extends Component{
               <MenuItem
                 onClick={this.handleClose}
                 component={Link}
-                to={{pathname: '/editProfile'}}
-              >
-                Edit My Profile
-              </MenuItem>
-              <MenuItem
-                onClick={this.handleClose}
-                component={Link}
                 to={{pathname: '/createProfile'}}
               >
                 Create New Profile
@@ -127,27 +122,6 @@ class Header extends Component{
       </div>
     )
   }
-
-
-
 }
-  
-  {/*
-  <header className="header">
-    <nav>
-      <ul>
-        <li className="navBar"></li>
-        <li className="navBar"><Link to='/users'>Individual Profiles</Link></li>
-        <li className="navBar"><Link to='/teamskills'>Team skills</Link></li>
-        <li className="navBar"><Link to='/teams'>Teams</Link></li>
-        <li className="navBar"></li>
-        <li className="navBar"><Link to='/create_project'>Create Project</Link></li>
-        <li className="navBar"><Link to="/project/566372f4d11de3498e2941c9">View project</Link></li>    
-        <li className="navBar"><Link to='/login'>Login</Link></li>
-      </ul>
-    </nav>
-  </header>
-  */}
 
-  
 export default Header;

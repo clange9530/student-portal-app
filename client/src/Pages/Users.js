@@ -19,6 +19,8 @@ class Users extends Component {
         super(props);
         var { match: { params } } = this.props;
         if(this.auth === true){
+            //login.js needs to be updated to pass UserID property to state in App.js, which can be passed to 
+            //this once logged in to be able to view "My Profile". Otherwise it fetches the parameter from the url.
             this.path = '/api/users/' + this.props.user;
         } else {
             this.path = '/api/users/' + params.userID;
@@ -42,10 +44,13 @@ class Users extends Component {
         };
     }
        
+    //Fetches user's data from API.
     componentDidMount(){
         fetch(this.path)
         .then(response => response.json())
         .then(UserData => {
+            //Data response was an array of a single JSON object, thus the following line. 
+            //Wasn't able to figure out how to send it as JUST a JSON object.
             var User = UserData[0];
             this.setState({ 
             Skills: User.Skills,
