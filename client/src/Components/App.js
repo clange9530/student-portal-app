@@ -4,6 +4,7 @@
 import React from "react";
 import Header from './Header';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import PropTypes from 'prop-types';
 import Users from '../Pages/Users';
 import Home from '../Pages/Home';
 import Teams from '../Pages/Teams';
@@ -40,8 +41,9 @@ class App extends React.Component {
 					<Route exact path='/' component={Home}/>
 					<Route path='/teams/:teamName' component={Teams}/>
 					<Route path='/users/:userID' component={Users}/>
-					<Route path='/createProfile' render={(props) => (<CreateProfile {...props} inherit='no'/>)} />
-					<Route path='/editProfile' render={(props) => (<CreateProfile {...props} inherit='yes'/>)} />
+					<Route path='/myProfile' render={(props) => (<Users {...props} user={this.state.user._id} auth={this.state.user.logged}/>)}/>
+					<Route path='/createProfile' render={(props) => (<CreateProfile {...props} inherit={false}/>)} />
+					<Route path='/editProfile' render={(props) => (<CreateProfile {...props} inherit={true} user={this.state.user._id}/>)} />
 					<Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
 					<Route path="/listmail/:projectId" component={ListMail} />
 					<Route path="/studentsurvey/:projectId/:surveyId?" component={StudentSurvey} />

@@ -14,12 +14,15 @@ import TableRow from '@material-ui/core/TableRow';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
-
 class Users extends Component {
     constructor(props){
         super(props);
         var { match: { params } } = this.props;
-        this.userID = params.userID;
+        if(this.auth === true){
+            this.path = '/api/users/' + this.props.user;
+        } else {
+            this.path = '/api/users/' + params.userID;
+        }
         this.state = {
             UserID: '',
             Skills: [],
@@ -40,7 +43,7 @@ class Users extends Component {
     }
        
     componentDidMount(){
-        fetch('/api/users/' + this.userID)
+        fetch(this.path)
         .then(response => response.json())
         .then(UserData => {
             var User = UserData[0];
@@ -73,9 +76,7 @@ class Users extends Component {
                 <div className="row">
                     <AppBar position="static">
                         <Toolbar variant="dense">
-                            <Typography variant="title" color="inherit">
-                            {this.state.UserID}
-                            </Typography>
+                            <Typography variant="title" color="inherit">{this.state.First} {this.state.Last}</Typography>
                         </Toolbar>
                     </AppBar>
                 </div>
@@ -87,37 +88,46 @@ class Users extends Component {
                                 <Typography>Profile pic goes here</Typography>
                             </Grid>
                             <Grid item md>
-                                <label className="display-label">Bio</label>
-                                <p>{this.state.Bio}</p>
+                                <label className="display-label">{this.state.UserID}'s Personal Info</label>
+                                <Table style={{'margin-top': '100', 'width': 'auto'}}>
+                                    <TableBody>
+                                        <TableHead color="inherit">
+                                            <Typography variant="h8">Contact Info</Typography>
+                                        </TableHead>  
+                                        <TableRow>
+                                            <TableCell>Username: {this.state.userID}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>Email: {this.state.Email}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>GitHub UserName: <Link to={{pathname: "http.github.com/" + this.state.Github}}></Link></TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>Phone: {this.state.Phone}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>Address: {this.state.Address}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>City: {this.state.City}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>State: {this.state.State}</TableCell>
+                                        </TableRow>
+                                        <TableRow>
+                                            <TableCell>Zip: {this.state.Zipcode}</TableCell>
+                                        </TableRow>
+                                    </TableBody>   
+                                </Table> 
                             </Grid>
                         </Grid>
                     </div>
                     <div className="column">
                         <Grid container direction="column">
                             <Grid item md>
-                                <label className="display-label">{this.state.UserID}'s Personal Info</label>
-                                <Table>
-                                    <TableBody>
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell>{this.state.First} {this.state.Last}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell>{this.state.Email}</TableCell>
-                                                <TableCell>{this.state.Github}</TableCell>
-                                                <TableCell>{this.state.Phone}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell>{this.state.Address}</TableCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <TableCell>{this.state.City}</TableCell>
-                                                <TableCell>{this.state.State}</TableCell>
-                                                <TableCell>{this.state.Zipcode}</TableCell>
-                                            </TableRow>
-                                        </TableHead>  
-                                    </TableBody>   
-                                </Table> 
+                                <label className="display-label">Bio</label>
+                                <p>{this.state.Bio}</p>
                             </Grid>
                             <Grid item sm>
                                 <Button 

@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { Input } from '@material-ui/core';
+import { Input, Toolbar } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 class CreateProfile extends Component{
     constructor(props){
         super(props);
-        const inherit = this.props.inherit;
-        if (inherit === 'no'){
+        if (this.props.inherit === false){
             this.state = {
                 UserID: '',
                 Password: '',
@@ -29,9 +33,10 @@ class CreateProfile extends Component{
                 ProfilePicURL: '',
                 Options: 'POST',
                 Target: 'api/users/',
-                FilesToUpload: []
+                FilesToUpload: [],
+                Open: false
             }
-        } else if(inherit === 'yes') {
+        } else if (this.props.inherit === true) {
             const data = this.props.location.state.data;
             this.state = {
                 UserID: data.UserID,
@@ -52,10 +57,13 @@ class CreateProfile extends Component{
                 ProfilePicURL: data.ProfilePicURL,
                 Options: 'PUT',
                 Target: 'api/users/' + data.UserID,
-                FilesToUpload: []
+                FilesToUpload: [],
+                Open: false
             }
         }
     }
+
+    
     
     handleChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
@@ -119,9 +127,18 @@ class CreateProfile extends Component{
         })
     }
 
+    dialogOpen = () => {
+        this.setState({ Open: true });
+    }
+
+    dialogClose = () => {
+        this.setState({ Open: false });
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         var User = this.state;
+        var id = this.state.UserID;
         fetch(this.state.Target, {
             method: this.state.Options,
             body: JSON.stringify(User),
@@ -130,7 +147,6 @@ class CreateProfile extends Component{
         .then(res => res.json())
         .then(data => console.log(data))
         .catch(err => console.log(err))
-        
         this.setState({
             UserID: '',
             Password: '',
@@ -146,17 +162,21 @@ class CreateProfile extends Component{
             Bio:'',
             Skills: [{name: ''}],
             Projects: [{name: ''}],
-            Team: ''
+            Team: '',
+            Open: false
         });
+        this.props.history.push('/');
     }
 
     render() {     
         return(
             <div className="column1">
-                <AppBar position="static" >
-                    <Typography variant="title" color="inherit">
-                    Enter user details
-                    </Typography>
+                <AppBar position="static" style={{'margin-bottom' : '15px'}}>
+                    <Toolbar variant="dense">
+                        <Typography variant="title" color="inherit">
+                        Enter user details
+                        </Typography>
+                    </Toolbar>
                 </AppBar>
                 <Grid container direction="column" spacing={16} >
                     <Grid item md={12}>
@@ -343,8 +363,29 @@ class CreateProfile extends Component{
                         />
                     </Grid>
                     <Grid item md={12}>
-                        <Button onClick={this.handleSubmit}>Save</Button>
-                    </Grid>      
+                        <Button onClick={this.dialogOpen}>Save</Button>
+                    </Grid>
+                    <Dialog
+                        open = {this.state.Open}
+                        onClose = {this.dialogClose}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                    >
+                        <DialogTitle id="alert-dialog-title">{"Save your profile?"}</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText id="alert-dialog-description">
+                            You are about to save your information and go back to the home screen. Do you wish to continue?
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.dialogClose} color="primary">
+                            No
+                            </Button>
+                            <Button onClick={this.handleSubmit} color="primary" autoFocus>
+                            Agree
+                            </Button>
+                        </DialogActions>
+                    </Dialog>    
                 </Grid>
             </div>
         )
