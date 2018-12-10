@@ -23,7 +23,7 @@ class Header extends Component{
   };
 
   render(){
-    const { auth, anchorEl } = this.state;
+    const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     const style = {
       marginLeft: 15,

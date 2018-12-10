@@ -4,7 +4,6 @@
 import React from "react";
 import Header from './Header';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import PropTypes from 'prop-types';
 import Users from '../Pages/Users';
 import Home from '../Pages/Home';
 import Teams from '../Pages/Teams';
