@@ -73,3 +73,5 @@ processData('./project.json', Models.Project);
 
 // Save project documentation
 processData('./projectdocumentation.json', Models.ProjectDocumentation);
+
+processData('./team.json', Models.Team);
