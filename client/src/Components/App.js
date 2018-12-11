@@ -37,10 +37,6 @@ class App extends React.Component {
 					<Route exact path='/' component={Home}/>
 					<Route path='/teams/:teamName' component={Teams}/>
 					<Route path='/users/:userID' component={Users}/>
-					{/*State needs to update with the UserID property so that the route 'myProfile' will be able to fetch data. 
-						 Currently it is updated with the mongoDB property '_id', and the GET method uses the UserID to pull a user's
-						 profile. */}
-					<Route path='/myProfile' render={(props) => (<Users {...props} user={this.state.user["_id"]}/>)}/>
 					<Route path='/createProfile' render={(props) => (<CreateProfile {...props} inherit={false}/>)} />
 					<Route path='/editProfile' render={(props) => (<CreateProfile {...props} inherit={true}/>)} />
 					<Route path="/sendmail/:projectId/:emailId?" component={SendMail} />

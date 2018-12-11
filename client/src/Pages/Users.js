@@ -18,13 +18,7 @@ class Users extends Component {
     constructor(props){
         super(props);
         var { match: { params } } = this.props;
-        if(this.auth === true){
-            //login.js needs to be updated to pass UserID property to state in App.js, which can be passed to 
-            //this once logged in to be able to view "My Profile". Otherwise it fetches the parameter from the url.
-            this.path = '/api/users/' + this.props.user;
-        } else {
-            this.path = '/api/users/' + params.userID;
-        }
+        this.path = '/api/users/' + params.userID;
         this.state = {
             UserID: '',
             Skills: [],
@@ -53,21 +47,21 @@ class Users extends Component {
             //Wasn't able to figure out how to send it as JUST a JSON object.
             var User = UserData[0];
             this.setState({ 
-            Skills: User.Skills,
-            Projects: User.Projects,
-            UserID: User.UserID,
-            First: User.First,
-            Last: User.Last,
-            Address: User.Address,
-            City: User.City,
-            State: User.State,
-            Zipcode: User.Zipcode,
-            Phone: User.Phone,
-            Email: User.Email,
-            Github: User.Github,
-            Team: User.Team,
-            Bio: User.Bio,
-            ProfilePicURL: User.ProfilePicURL
+                Skills: User.Skills,
+                Projects: User.Projects,
+                UserID: User.UserID,
+                First: User.First,
+                Last: User.Last,
+                Address: User.Address,
+                City: User.City,
+                State: User.State,
+                Zipcode: User.Zipcode,
+                Phone: User.Phone,
+                Email: User.Email,
+                Github: User.Github,
+                Team: User.Team,
+                Bio: User.Bio,
+                ProfilePicURL: User.ProfilePicURL
             })
         })
         .catch(err => console.log(err));
