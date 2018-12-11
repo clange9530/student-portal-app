@@ -2,12 +2,19 @@
 ## Credits
 
 **React.js**: The entire front-end of this application was built using React.js (https://reactjs.org/).
+
 **Material-ui**: Additional front-end components and styling are from Material-ui (https://material-ui.com/).
+
 **Node.js**: The back-end of this application was built using and runs in Node.js (https://nodejs.org/).
+
 **Express.js**: Express.js was used to provide routing and simplify development of the back-end of the application (https://expressjs.com/).
+
 **Mongoose**: Mongoose was used to simplify interaction with the applications MongoDB database (https://mongoosejs.com/).
+
 **MongoDB:** Data for the application is stored in a MongoDB no-SQL database (https://www.mongodb.com/).
+
 **MLab**: Hosting for the application's MongoDB database was provided by MLab (https://mlab.com/home).
+
 **Nodemailer**: SMTP functionality is supplied by Nodemailer (https://nodemailer.com/about/).
 
 **Test Data Creation**: The utility used to insert test data into the MongoDB database (JSONToMongo.js) was adapted from the file JSONToMongo.js used in Bootcamp Assignment #3 (https://github.com/cgardnermccune/UF-Directory-App-Assignment-Assignment3_v2018).
@@ -89,8 +96,7 @@ Set the values of the AWS settings to the correct values for your AWS account.  
     aws: {
       accessKey: '<insert your access key provided by AWS>',
       secretKey: '<insert your secret key provided by AWS>',
-      bucketName: '<insert the name of the AWS S3 bucket where you 
-                    would like to store uploaded files>',
+      bucketName: '<insert the name of the AWS S3 bucket where you would like to store uploaded files>',
       region: '<insert the name of the AWS region where you would like to store files>'
     }
 
