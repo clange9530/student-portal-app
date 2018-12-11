@@ -113,11 +113,6 @@ class ListMail extends React.Component {
                     </Link>
                 </div>
 
-                { /* TODO: Need to improve styling of table/grid:
-                        1. Column widths
-                        2. Overall table width
-                        3. unexpected space between columns
-                        4. padding and margins for table cells */ }
                 <Grid container direction="column" spacing={16}>
                     <div className="tableWrapper email-table">
                         <table>

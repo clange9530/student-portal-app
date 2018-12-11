@@ -208,7 +208,6 @@ class SendMail extends React.Component {
                     placeholder="Enter the subject for the message"
                 />
 
-            /* TODO: Figure out if another react or material Ui component would work better here */
             bodyInput = 
                 <textarea 
                     className="text-area" 
