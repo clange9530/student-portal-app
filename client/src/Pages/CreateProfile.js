@@ -136,7 +136,6 @@ class CreateProfile extends Component{
     handleSubmit = (e) => {
         e.preventDefault();
         var User = this.state;
-        var id = this.state.UserID;
         fetch(this.state.Target, {
             method: this.state.Options,
             body: JSON.stringify(User),
@@ -376,12 +375,8 @@ class CreateProfile extends Component{
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={this.dialogClose} color="primary">
-                            No
-                            </Button>
-                            <Button onClick={this.handleSubmit} color="primary" autoFocus>
-                            Agree
-                            </Button>
+                            <Button onClick={this.dialogClose} color="primary">No</Button>
+                            <Button onClick={this.handleSubmit} color="primary" autoFocus>Agree</Button>
                         </DialogActions>
                     </Dialog>    
                 </Grid>
