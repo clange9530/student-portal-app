@@ -16,8 +16,18 @@ var studentSurveyResponseSchema = new Schema({
     }]
 });
 
+/* Create a 'pre' function that populates the date_submitted property */
+studentSurveyResponseSchema.pre('save', function(next) {
+    // Only populate if not already populated... 
+    // this should really only matter when we are creating test data
+    if (!this.date_submitted) {
+        this.date_submitted = new Date();
+    }
+    next();
+  });
+
 /* Use the schema to instantiate a Mongoose model */
 var StudentSurveyResponse = mongoose.model('StudentSurveyResponse', studentSurveyResponseSchema);
 
-/* Export the model to make it avaiable to other parts of the application */
+/* Export the model to make it available to other parts of the application */
 module.exports = StudentSurveyResponse;

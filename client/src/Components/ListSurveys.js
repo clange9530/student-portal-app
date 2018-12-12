@@ -61,53 +61,42 @@ class ListSurveys extends React.Component {
             margin: '8px 8px 4px 2px'
         };
 
-        var divStyle = {
-            border: '2px solid #000000'
-        };
+        const buttonDivStyle = {
+            margin: '0px 0px 24px 0px'
+        }
 
         return (
-            <div style={{divStyle}} className="column1">
-                <Card>
-                    <AppBar position="static" >
-                        <Toolbar variant="dense">
-                            <Typography variant="title" color="inherit">
-                            Project Surveys
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
-                    <Grid container direction="column" spacing={16} className="email-grid">
-                        <Grid item md={12}>
-                            <Link to={"/studentsurvey/" + this.projectId}>
-                                <Button variant="contained" style={style} color="primary" >
-                                    <i className="material-icons mdc-button__icon" aria-hidden="true">note_add</i>
-                                    Submit student survey
-                                </Button>
-                            </Link>
-                            <Link to={"/clientsurvey/" + this.projectId}>
-                                <Button variant="contained" style={style} color="primary" >
-                                    <i className="material-icons mdc-button__icon" aria-hidden="true">open_in_browser</i>
-                                    View client survey
-                                </Button>
-                            </Link>
-                        </Grid>                    
-                    </Grid>
-                    <Grid container direction="column" spacing={16}>
-                        <div className="tableWrapper">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th className="survey-date-submitted-column">Date submitted</th>
-                                        <th className="survey-student-column">Student</th>
-                                    </tr>
-                                </thead>
+            <div className="column1">
+                <div style={buttonDivStyle}>
+                    <Link to={"/studentsurvey/" + this.projectId}>
+                        <Button variant="contained" style={style} color="primary" >
+                            <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">note_add</i>
+                            Submit student survey
+                        </Button>
+                    </Link>
+                    <Link to={"/clientsurvey/" + this.projectId}>
+                        <Button variant="contained" style={style} color="primary" >
+                            <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">open_in_browser</i>
+                            View client survey
+                        </Button>
+                    </Link>
+                </div>
+                <Grid container direction="column" spacing={16}>
+                    <div className="tableWrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th className="survey-date-submitted-column">Date submitted</th>
+                                    <th className="survey-student-column">Student</th>
+                                </tr>
+                            </thead>
 
-                                <tbody>
-                                    {this.state.surveyList}
-                                </tbody>
-                            </table>
-                        </div>
-                    </Grid>
-                </Card>
+                            <tbody>
+                                {this.state.surveyList}
+                            </tbody>
+                        </table>
+                    </div>
+                </Grid>
             </div>
         )
     }

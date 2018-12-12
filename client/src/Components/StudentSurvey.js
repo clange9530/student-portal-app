@@ -6,6 +6,14 @@ class StudentSurvey extends React.Component {
     constructor(props) {
         super(props);
 
+        const {user} = this.props;
+
+        this.userId = user._id;
+
+        // TODO: Need a way to get the user's first and last name given the id that is passed in...
+        this.userFirstName = "Firstname";
+        this.userLastName = "Lastname";
+
         this.handleChange = this.handleChange.bind(this);
 
         this.state = {
@@ -16,13 +24,9 @@ class StudentSurvey extends React.Component {
     }
 
     componentDidMount() {
-        // Get project id from params
-        var { match: { params } } = this.props;
-        
-        var surveyId = params.surveyId;
-
-        this.projectId = params.projectId;
-        this.studentId = "1234567890";         // TODO: Need this to be passed in
+        // Get project and survey id from params
+        var surveyId = this.props.params.params["surveyId"];
+        this.projectId = this.props.params.params["projectId"];
 
         if (surveyId) {
             console.log("Viewing existing survey");
@@ -79,7 +83,8 @@ class StudentSurvey extends React.Component {
             },
             body: JSON.stringify({
                 project_id: this.projectId,
-                student_id: this.studentId,
+                student_id: this.userId,
+                student_name: this.userFirstName + " " + this.userLastName,
                 questions: this.state.questions
             })
         });
@@ -119,7 +124,7 @@ class StudentSurvey extends React.Component {
                         input = 
                             <Input 
                                 className="text-input" 
-                                name={q.question_number}
+                                name={questionKey}
                                 id={questionKey}
                                 title={questionText}
                                 value={q.question_response} 
@@ -150,7 +155,7 @@ class StudentSurvey extends React.Component {
 
             submitSurveyButton = 
                 <Button variant="contained" style={style} color="primary" onClick={this.submitSurvey.bind(this)}>
-                    <i className="material-icons mdc-button__icon" aria-hidden="true">arrow_forward</i>
+                    <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">arrow_forward</i>
                     Submit Survey
                 </Button>;
 
@@ -165,7 +170,7 @@ class StudentSurvey extends React.Component {
                 {questionList}
                 {submitSurveyButton}
                 <Button variant="outlined" style={style} color="primary" onClick={this.handleGoBack.bind(this)}>
-                    <i className="material-icons mdc-button__icon" aria-hidden="true">{cancelButtonIcon}</i>
+                    <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">{cancelButtonIcon}</i>
                     {cancelButtonText}
                 </Button>
             </div>

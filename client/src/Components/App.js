@@ -44,7 +44,16 @@ class App extends React.Component {
 					<Route path='/editProfile' render={(props) => (<CreateProfile {...props} inherit='yes'/>)} />
 					<Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
 					<Route path="/listmail/:projectId" component={ListMail} />
-					<Route path="/studentsurvey/:projectId/:surveyId?" component={StudentSurvey} />
+					<Route path="/studentsurvey/:projectId/:surveyId?" 
+						render={(props) =>
+							<StudentSurvey 
+								user={this.state.user}
+								params={props.match}
+								history={props.history}
+							/>
+						}
+					/>
+
 					<Route path="/clientsurvey/:projectId" component={ClientSurvey}/>
 					<Route path="/project/:projectId" 
 						render={props => 

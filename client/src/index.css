@@ -143,6 +143,10 @@ td:hover {
 	border-radius: 4px;
 }
 
+.email-table {
+	max-height: 30%;
+}
+
 .email-date-sent-column {
 	width: 15%;
 	padding-left: 10px
@@ -172,4 +176,8 @@ td:hover {
 
 .survey-student-column {
 	width: 75%;
+}
+
+.button-icon {
+	margin-right: 6px;
 }

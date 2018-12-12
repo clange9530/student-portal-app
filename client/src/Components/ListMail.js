@@ -98,56 +98,40 @@ class ListMail extends React.Component {
             margin: '8px 8px 4px 2px'
         };
 
-        var divStyle = {
-            border: '2px solid #000000'
-        };
+        const buttonDivStyle = {
+            margin: '0px 0px 24px 0px'
+        }
 
         return (
-            <div style={{divStyle}} className="email-list">
-                <Card>
-                    <AppBar position="static" >
-                        <Toolbar variant="dense">
-                            <Typography variant="title" color="inherit">
-                            Project Emails
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
-                    <Grid container direction="column" spacing={16} className="email-grid">
-                        <Grid item md={12}>
-                            <Link to={"/sendmail/" + this.projectId}>
-                                <Button variant="contained" style={style} color="primary" >
-                                    <i className="material-icons mdc-button__icon" aria-hidden="true">mail_outline</i>
-                                    New message
-                                    </Button>
-                            </Link>
-                        </Grid>                    
-                    </Grid>
+            <div className="email-list">
+                <div style={buttonDivStyle}>
+                    <Link to={"/sendmail/" + this.projectId}>
+                        <Button variant="contained" style={style} color="primary" >
+                            <i className="material-icons mdc-button__icon button-icon" aria-hidden="true">mail_outline</i>
+                            New message
+                            </Button>
+                    </Link>
+                </div>
 
-                    { /* TODO: Need to improve styling of table/grid:
-                            1. Column widths
-                            2. Overall table width
-                            3. unexpected space between columns
-                            4. padding and margins for table cells */ }
-                    <Grid container direction="column" spacing={16}>
-                        <div className="tableWrapper">
-                            <table>
-                                <thead>
-                                    <tr>
-                                    <th></th>
-                                        <th className="email-date-sent-column">Date sent</th>
-                                        <th className="email-subject-column">Subject</th>
-                                        <th className="email-sender-column">Sender</th>
-                                        <th className="email-recipient-column">Recipient</th>
-                                    </tr>
-                                </thead>
+                <Grid container direction="column" spacing={16}>
+                    <div className="tableWrapper email-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                <th></th>
+                                    <th className="email-date-sent-column">Date sent</th>
+                                    <th className="email-subject-column">Subject</th>
+                                    <th className="email-sender-column">Sender</th>
+                                    <th className="email-recipient-column">Recipient</th>
+                                </tr>
+                            </thead>
 
-                                <tbody>
-                                    {this.state.emailList}
-                                </tbody>
-                            </table>
-                        </div>
-                    </Grid>
-                </Card>
+                            <tbody>
+                                {this.state.emailList}
+                            </tbody>
+                        </table>
+                    </div>
+                </Grid>
             </div>
         )    
     }
