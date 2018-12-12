@@ -1,6 +1,3 @@
-//© 2018 kaboom18
-//All rights reserved.
-
 import React from "react";
 import Header from './Header';
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -40,8 +37,8 @@ class App extends React.Component {
 					<Route exact path='/' component={Home}/>
 					<Route path='/teams/:teamName' component={Teams}/>
 					<Route path='/users/:userID' component={Users}/>
-					<Route path='/createProfile' render={(props) => (<CreateProfile {...props} inherit='no'/>)} />
-					<Route path='/editProfile' render={(props) => (<CreateProfile {...props} inherit='yes'/>)} />
+					<Route path='/createProfile' render={(props) => (<CreateProfile {...props} inherit={false}/>)} />
+					<Route path='/editProfile' render={(props) => (<CreateProfile {...props} inherit={true}/>)} />
 					<Route path="/sendmail/:projectId/:emailId?" component={SendMail} />
 					<Route path="/listmail/:projectId" component={ListMail} />
 					<Route path="/studentsurvey/:projectId/:surveyId?" 

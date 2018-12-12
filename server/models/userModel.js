@@ -1,14 +1,13 @@
-/*schemas*/
 var mongoose = require('mongoose'), 
     Schema = mongoose.Schema;
 
 /* 
-UserSchema
-	UserId is a primary key
-	mongodb has 16mb limit so profile pic should be addressed before hand when a user clicks create
-  */
+Skills/Projects save as arrays of objects, ex:
+{'name' : 'skill1'} or {'name': 'project1'}
+UserID & Password are values used to log in
+*/
 var UserSchema = new Schema({
-  UserID: { type: String, unique: true },
+  UserID: { type: String, unique: true }, 
   Password: String,
   First: String,
   Last: String,
@@ -21,13 +20,12 @@ var UserSchema = new Schema({
   Github:String,
   Team:String,
   Bio:String,
-  Skills:Array,
-  Projects: Array,
+  Skills:Array, 
+  Projects: Array, 
   ProfilePicURL: String
 },{collection: 'users'});
 
 
 var User = mongoose.model('User', UserSchema);
 
-/* Export the model to make it avaiable to other parts of your Node application */
 module.exports = User;
