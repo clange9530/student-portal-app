@@ -1,0 +1,16 @@
+{
+    "overwrite": "1",
+    "entries": [
+        {
+            "_id": "9c0887fec0162288c49cbc75",
+            "teamName": "Team 1",
+            "members": [
+                "5c0887fec0162288c49cbc75"
+            ],
+            "prod_mgr": "Product Manager",
+            "scrum_mstr": "Scrum Master",
+            "primary_cont": "Primary Contact"
+
+        }
+    ]
+}
