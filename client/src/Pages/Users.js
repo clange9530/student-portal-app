@@ -13,6 +13,25 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import { Input } from '@material-ui/core';
+import S3FileUpload from 'react-s3';
+
+
+//This will set up the environment variables for AWS S3 Bucket
+const awsConfig = require('../awsConfig');
+
+//console.log(awsConfig);
+
+//Middleware for aws upload.  Run npm install --save react-s3
+
+//This is the setup for AWS bucket
+const config = {
+    bucketName: awsConfig.aws.AWS_BUCKET_NAME,
+    region: awsConfig.aws.AWS_REGION,
+    accessKeyId: awsConfig.aws.AWS_ACCESS_KEY,
+    secretAccessKey: awsConfig.aws.AWS_SECRET_KEY
+}
+console.log(config);
 
 class Users extends Component {
     constructor(props){
@@ -37,7 +56,39 @@ class Users extends Component {
             ProfilePicURL: ''
         };
     }
-       
+    
+    //AWS Functionality to upload image to bucket
+    upload = (e) => {
+        console.log(e.target.files);
+        S3FileUpload.uploadFile(e.target.files[0], config)
+         .then(data => {
+              console.log(data);
+              const location = JSON.stringify(data.location);
+              const locationURL = encodeURIComponent(location.substring(1, location.length-1));
+              console.log(location);
+              console.log(this);
+              console.log(this.state);
+              var user = this.state;
+              user.ProfilePicURL = locationURL;
+              console.log(user)
+              this.forceUpdate();
+              fetch('/api/users/' + this.state.UserID, {
+                  method: 'PUT',
+                  body: JSON.stringify(user),
+                  headers: {"content-type": "application/json"}
+              })
+              .then(res => res.json())
+              .then(data => console.log(data))
+              .catch(err => console.log(err))
+
+         })
+         .catch( (err) => {
+              alert(err);
+         })
+
+   }
+
+
     //Fetches user's data from API.
     componentDidMount(){
         fetch(this.path)
@@ -80,9 +131,22 @@ class Users extends Component {
                 <div className="row">
                     <div className="column">
                         <Grid container direction="column">
+                        <Grid item md>
+                                <img src={decodeURIComponent(this.state.ProfilePicURL)} alt="profile pic" style={{width:300}}></img>
+                            </Grid>
                             <Grid item md>
-                                <img src={this.state.ProfilePicURL} alt="profile pic"></img>
-                                <Typography>Profile pic goes here</Typography>
+                                <input id ="awsUpload"
+                                    type="file"
+                                    ref={(ref) => this.upload = ref} 
+                                    onChange={(e) => this.upload.click(e.target.files)}
+                                    style={{visibility: "hidden",
+                                    height:1}}
+                                />
+                                <Button
+                                    variant="contained"
+                                    size="medium"
+                                    onClick={() => this.upload.click()}
+                                >Upload A Profile Picture</Button>
                             </Grid>
                             <Grid item md>
                                 <Table style={{'margin-top': '100', 'width': 'auto'}}>
