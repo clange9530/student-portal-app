@@ -67,15 +67,14 @@ class Users extends Component {
               const locationURL = encodeURIComponent(location.substring(1, location.length-1));
               console.log(location);
               console.log(this);
-              this.setState({
-                   ProfilePicURL: locationURL
-              });
               console.log(this.state);
+              var user = this.state;
+              user.ProfilePicURL = locationURL;
+              console.log(user)
               this.forceUpdate();
-
               fetch('/api/users/' + this.state.UserID, {
                   method: 'PUT',
-                  body: JSON.stringify(this.state),
+                  body: JSON.stringify(user),
                   headers: {"content-type": "application/json"}
               })
               .then(res => res.json())
@@ -83,7 +82,6 @@ class Users extends Component {
               .catch(err => console.log(err))
 
          })
-
          .catch( (err) => {
               alert(err);
          })
@@ -137,21 +135,18 @@ class Users extends Component {
                                 <img src={decodeURIComponent(this.state.ProfilePicURL)} alt="profile pic" style={{width:300}}></img>
                             </Grid>
                             <Grid item md>
-                                 <input id ="awsUpload"
-                                     type="file"
-                                     onChange={this.upload}
-                                     style={{visibility: "hidden",
-                                     height:1}}
-                                     />
-                           </Grid>
-                            <Grid item md>
-                                <label for="awsUpload"
-
-                                     class="MuiButton-label-190 MuiButton-contained-200 MuiButton-root-189 MuiButtonBase-root-215"
-                                     style={{width:175}}>
-                                     Change Profile Pic
-                                </label>
-
+                                <input id ="awsUpload"
+                                    type="file"
+                                    ref={(ref) => this.upload = ref} 
+                                    onChange={(e) => this.upload.click(e.target.files)}
+                                    style={{visibility: "hidden",
+                                    height:1}}
+                                />
+                                <Button
+                                    variant="contained"
+                                    size="medium"
+                                    onClick={() => this.upload.click()}
+                                >Upload A Profile Picture</Button>
                             </Grid>
                             <Grid item md>
                                 <Table style={{'margin-top': '100', 'width': 'auto'}}>

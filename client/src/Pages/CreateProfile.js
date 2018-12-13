@@ -112,19 +112,6 @@ class CreateProfile extends Component{
         })
     }
 
-    onDrop = (fileInput) => {
-        var file = document.getElementById("fileUpload");
-        var name = file.files[0].name;
-        console.log(name);
-        fetch('api/upload',{
-            method: 'POST',
-            body: fileInput
-        })
-        this.setState({
-            ProfilePicURL: "http://s3.amazonaws.com/cen-3031-student-portal-app/" + name
-        })
-    }
-
     dialogOpen = () => {
         this.setState({ Open: true });
     }
@@ -350,13 +337,6 @@ class CreateProfile extends Component{
                             onChange={this.handleChange}
                             placeholder="Say something about yourself"
                             fullWidth={false}
-                        />
-                    </Grid>
-                    <Grid item md={12}>
-                        <input 
-                            type="file"
-                            id="fileUpload"
-                            onChange= {this.onDrop}
                         />
                     </Grid>
                     <Grid item md={12}>

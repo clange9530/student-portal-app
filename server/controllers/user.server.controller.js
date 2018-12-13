@@ -52,7 +52,8 @@ module.exports.create = function(req, res) {
       Team: req.body.Team,
       Bio: req.body.Bio,
       Skills: req.body.Skills,
-      Projects: req.body.Projects
+      Projects: req.body.Projects,
+      ProfilePicURL: req.body.ProfilePicURL
     }
     console.log(user);
     User.findOneAndUpdate({UserID: user.UserID}, user, function(err) {
