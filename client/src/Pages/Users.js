@@ -135,18 +135,21 @@ class Users extends Component {
                                 <img src={decodeURIComponent(this.state.ProfilePicURL)} alt="profile pic" style={{width:300}}></img>
                             </Grid>
                             <Grid item md>
-                                <input id ="awsUpload"
-                                    type="file"
-                                    ref={(ref) => this.upload = ref} 
-                                    onChange={(e) => this.upload.click(e.target.files)}
-                                    style={{visibility: "hidden",
-                                    height:1}}
+                                 <input id ="awsUpload"
+                                     type="file"
+                                     onChange={this.upload}
+                                     style={{visibility: "hidden",
+                                     height:1}}
                                 />
-                                <Button
-                                    variant="contained"
-                                    size="medium"
-                                    onClick={() => this.upload.click()}
-                                >Upload A Profile Picture</Button>
+                           </Grid>
+                            <Grid item md> 
+                                <label 
+                                    for="awsUpload"
+                                    class="MuiButton-label-190 MuiButton-contained-200 MuiButton-root-189 MuiButtonBase-root-215"
+                                    style={{width:175}}>
+                                    Change Profile Pic
+                                </label>
+
                             </Grid>
                             <Grid item md>
                                 <Table style={{'margin-top': '100', 'width': 'auto'}}>
