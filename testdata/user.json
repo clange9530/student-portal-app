@@ -6,7 +6,24 @@
             "UserID": "test",
             "Password": "test",
             "First": "Firstname",
-            "Last": "Lastname"
+            "Last": "Lastname",
+            "Skills": [
+                {
+                    "name": "Having green skin"
+                },
+                {
+                    "name": "Being very creepy"
+                }
+            ],
+            "Address": "2247 Giza Way",
+            "City": "Three Pyramids",
+            "State": "Giza",
+            "Zipcode": "12345",
+            "Phone": "1234567890",
+            "Email": "1234@yahoo.com",
+            "Github": "githubuser2",
+            "Team": "Losers",
+            "Bio": "Used to be very popular, currently out of style"
         }
     ]
 }
