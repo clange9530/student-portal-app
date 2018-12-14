@@ -59,6 +59,17 @@ Follow the steps below to run the application locally.
 1. Execute the command **npm start**.
 1. In a web browser, navigate to http://localhost:3000/.
 
+## Using the Application
+
+If you are using the test database described in the client documentation:
+
+1. Click the user icon and select **Login** from the drop-down menu.  Log in using the username "test" and the password "test".
+1. Click **View Project** to view project information including details, project emails, student and client surveys, and uploaded documentation files.
+1. Click the user icon and select **Create New Profile** to create a new user profile.
+1. Navigate to http://localhost:3000/users/lange3 to view or edit the user profile for the user lange3.
+1. Navigate to http://localhost:3000/teams/Team%201 to see the team profile page.
+
+
 ## Creating Test Data
 
 1. Open a Node.js command prompt and navigate to the **testdata** subdirectory off of the root directory of the application.
